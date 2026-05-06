@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#272A5F">
+<title>Quiz IA — CDG88</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<style>
+:root{
+  --navy:#272A5F;
+  --rouge:#E94059;
+  --orange:#F7A720;
+  --vert:#2ecc71;
+  --bleu:#4285F4;
+  --fond:#F4F5FB;
+  --texte:#272A5F;
+  --texte-sec:#6b6f8e;
+  /* Couleurs des 4 réponses */
+  --quiz-A:#E94059;
+  --quiz-B:#F7A720;
+  --quiz-C:#4285F4;
+  --quiz-D:#2ecc71;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--navy);color:#fff;-webkit-font-smoothing:antialiased}
+
+body{display:flex;flex-direction:column;min-height:100vh;min-height:100dvh}
+
+/* === Conteneur des écrans (un seul visible à la fois) === */
+.screen{position:absolute;inset:0;display:none;flex-direction:column;padding:1.5rem;animation:fade-in .35s ease-out}
+.screen.active{display:flex}
+@keyframes fade-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* === Header commun (logo + identité) === */
+.app-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;padding-top:.3rem;gap:.8rem;flex-wrap:nowrap}
+.app-brand{display:flex;align-items:center;gap:.55rem;flex-shrink:0}
+.app-brand-circle{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--orange) 0%, var(--rouge) 100%);display:flex;align-items:center;justify-content:center;font-size:.95rem;font-weight:900;color:#fff;flex-shrink:0}
+.app-brand-text{font-size:.78rem;letter-spacing:.18em;font-weight:800;color:rgba(255,255,255,.85);text-transform:uppercase;white-space:nowrap}
+.app-user{font-size:.85rem;color:rgba(255,255,255,.65);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.app-user strong{color:var(--orange);font-weight:800}
+
+/* Réduit la marque sur très petit écran pour éviter les chevauchements */
+@media (max-width: 360px){
+  .app-brand-text{font-size:.7rem;letter-spacing:.14em}
+  .app-user{font-size:.78rem}
+}
+
+/* ============================================================
+   ÉCRAN 1 — BIENVENUE / SAISIE PRÉNOM
+   ============================================================ */
+#screen-welcome{justify-content:center;align-items:center;text-align:center;padding:2rem 1.5rem}
+.welcome-icon{font-size:4rem;line-height:1;margin-bottom:1.4rem;filter:drop-shadow(0 6px 20px rgba(247,167,32,.4));animation:bounce-in .6s ease-out}
+@keyframes bounce-in{0%{opacity:0;transform:scale(.5)}60%{opacity:1;transform:scale(1.1)}100%{transform:scale(1)}}
+.welcome-title{font-size:2rem;font-weight:900;line-height:1.1;margin-bottom:.6rem;letter-spacing:-.02em}
+.welcome-title .hl{color:var(--orange)}
+.welcome-sub{font-size:.95rem;color:rgba(255,255,255,.75);margin-bottom:2.4rem;line-height:1.5;font-weight:500;max-width:300px}
+
+.input-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:var(--orange);margin-bottom:.6rem;align-self:flex-start;width:100%;text-align:left;padding:0 .3rem}
+.input-name{width:100%;font-size:1.2rem;font-weight:700;font-family:inherit;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.15);border-radius:14px;padding:1rem 1.2rem;color:#fff;letter-spacing:.01em;outline:none;transition:border-color .2s,background .2s}
+.input-name::placeholder{color:rgba(255,255,255,.35);font-weight:500}
+.input-name:focus{border-color:var(--orange);background:rgba(255,255,255,.12)}
+
+.btn-join{width:100%;margin-top:1.2rem;background:linear-gradient(135deg,var(--rouge) 0%, #f06478 100%);color:#fff;border:none;font-family:inherit;font-size:1.05rem;font-weight:800;letter-spacing:.04em;padding:1.1rem;border-radius:14px;cursor:pointer;text-transform:uppercase;box-shadow:0 8px 24px rgba(233,64,89,.4);transition:transform .15s,box-shadow .15s}
+.btn-join:active{transform:scale(.98)}
+.btn-join:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
+
+.welcome-rgpd{font-size:.72rem;color:rgba(255,255,255,.4);font-style:italic;margin-top:1.5rem;line-height:1.5;max-width:300px}
+
+/* ============================================================
+   ÉCRAN 2 — EN ATTENTE
+   ============================================================ */
+#screen-waiting{justify-content:center;align-items:center;text-align:center}
+.waiting-pulse{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--orange) 0%, var(--rouge) 100%);display:flex;align-items:center;justify-content:center;font-size:3rem;margin-bottom:2rem;position:relative;box-shadow:0 0 0 0 rgba(247,167,32,.5);animation:pulse-ring 2s ease-out infinite}
+@keyframes pulse-ring{
+  0%{box-shadow:0 0 0 0 rgba(247,167,32,.6)}
+  60%{box-shadow:0 0 0 30px rgba(247,167,32,0)}
+  100%{box-shadow:0 0 0 0 rgba(247,167,32,0)}
+}
+.waiting-title{font-size:1.5rem;font-weight:800;margin-bottom:.6rem;letter-spacing:-.01em}
+.waiting-sub{font-size:.95rem;color:rgba(255,255,255,.7);line-height:1.5;max-width:280px;font-weight:500}
+.waiting-tip{margin-top:2rem;font-size:.85rem;color:rgba(255,255,255,.5);font-style:italic;background:rgba(255,255,255,.06);border-left:3px solid var(--orange);border-radius:0 8px 8px 0;padding:.7rem 1rem;text-align:left;max-width:320px;line-height:1.45}
+
+/* ============================================================
+   ÉCRAN 3 — QUESTION (4 boutons couleur)
+   ============================================================ */
+#screen-question{padding:1rem}
+.q-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.8rem;padding:0 .3rem}
+.q-num{font-size:.75rem;letter-spacing:.18em;font-weight:800;color:rgba(255,255,255,.7);text-transform:uppercase;display:flex;align-items:center;gap:.4rem}
+.q-num::before{content:"";width:14px;height:2px;background:var(--orange)}
+.q-timer{display:flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.1);border-radius:18px;padding:.35rem .85rem;font-size:1rem;font-weight:900;color:var(--orange);letter-spacing:.02em}
+.q-timer.warning{color:var(--rouge);animation:pulse-warning 1s ease-in-out infinite}
+.q-timer-icon{font-size:.95rem}
+@keyframes pulse-warning{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+
+.q-instruction{font-size:.95rem;color:rgba(255,255,255,.85);text-align:center;margin-bottom:1rem;font-weight:600;line-height:1.4;padding:0 .3rem}
+.q-instruction strong{color:var(--orange)}
+
+.q-grid{flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:.8rem;min-height:0}
+.q-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;border:none;border-radius:18px;color:#fff;font-family:inherit;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.25);transition:transform .12s,box-shadow .12s;padding:1rem}
+.q-btn:active{transform:scale(.96)}
+.q-btn.a{background:linear-gradient(135deg,var(--quiz-A) 0%, #f06478 100%)}
+.q-btn.b{background:linear-gradient(135deg,var(--quiz-B) 0%, #ffc05a 100%)}
+.q-btn.c{background:linear-gradient(135deg,var(--quiz-C) 0%, #6ba4f7 100%)}
+.q-btn.d{background:linear-gradient(135deg,var(--quiz-D) 0%, #5cd989 100%)}
+.q-btn-letter{font-size:3.5rem;font-weight:900;letter-spacing:-.02em;line-height:1;text-shadow:0 2px 8px rgba(0,0,0,.2)}
+.q-btn-shape{position:absolute;top:.7rem;right:.7rem;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;opacity:.85}
+.q-btn.locked{opacity:.4;pointer-events:none;filter:grayscale(.4)}
+.q-btn.locked.selected{opacity:1;filter:none;box-shadow:0 0 0 4px var(--orange),0 6px 20px rgba(0,0,0,.3)}
+
+/* ============================================================
+   ÉCRAN 4 — FEEDBACK (après réponse / révélation)
+   ============================================================ */
+#screen-feedback{justify-content:center;align-items:center;text-align:center;padding:2rem 1.5rem}
+.feedback-result{width:120px;height:120px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:3.5rem;margin-bottom:1.6rem;animation:bounce-in .5s ease-out;box-shadow:0 8px 30px rgba(0,0,0,.3)}
+.feedback-result.correct{background:linear-gradient(135deg,var(--vert) 0%, #5cd989 100%)}
+.feedback-result.wrong{background:linear-gradient(135deg,var(--rouge) 0%, #f06478 100%)}
+.feedback-result.timeout{background:linear-gradient(135deg,var(--texte-sec) 0%, #8b8eb0 100%)}
+
+.feedback-title{font-size:1.8rem;font-weight:900;line-height:1.1;margin-bottom:.5rem;letter-spacing:-.01em}
+.feedback-sub{font-size:.95rem;color:rgba(255,255,255,.7);font-weight:500;margin-bottom:2rem;line-height:1.45;max-width:300px}
+
+.feedback-card{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);border-radius:16px;padding:1.2rem 1.4rem;width:100%;max-width:320px;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between}
+.feedback-card-label{font-size:.7rem;letter-spacing:.18em;color:rgba(255,255,255,.55);font-weight:800;text-transform:uppercase}
+.feedback-card-value{font-size:1.6rem;font-weight:900;color:var(--orange);letter-spacing:-.01em}
+.feedback-card.score .feedback-card-value{color:var(--orange)}
+.feedback-card.rank .feedback-card-value{color:#fff}
+.feedback-card.rank .feedback-card-value .rank-suffix{font-size:.95rem;color:rgba(255,255,255,.5);font-weight:600;margin-left:.2rem}
+
+.feedback-wait{margin-top:1rem;font-size:.85rem;color:rgba(255,255,255,.45);font-style:italic;display:flex;align-items:center;gap:.5rem}
+.feedback-wait::before{content:"⏳";font-style:normal;font-size:1rem}
+
+/* ============================================================
+   ÉCRAN 5 — FIN DU QUIZ
+   ============================================================ */
+#screen-end{justify-content:center;align-items:center;text-align:center;padding:2rem 1.5rem}
+.end-trophy{font-size:5rem;line-height:1;margin-bottom:1.5rem;filter:drop-shadow(0 8px 24px rgba(247,167,32,.4));animation:trophy-bounce .8s ease-out}
+@keyframes trophy-bounce{0%{opacity:0;transform:scale(.5) rotate(-10deg)}60%{opacity:1;transform:scale(1.15) rotate(5deg)}100%{transform:scale(1) rotate(0)}}
+.end-title{font-size:2rem;font-weight:900;line-height:1.1;margin-bottom:.5rem;letter-spacing:-.02em}
+.end-sub{font-size:.95rem;color:rgba(255,255,255,.7);margin-bottom:1.8rem;line-height:1.5;font-weight:500;max-width:300px}
+
+.end-stats{display:flex;flex-direction:column;gap:.7rem;width:100%;max-width:320px;margin-bottom:1.4rem}
+.end-stat{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);border-radius:14px;padding:1rem 1.2rem;display:flex;justify-content:space-between;align-items:center}
+.end-stat-label{font-size:.78rem;letter-spacing:.12em;color:rgba(255,255,255,.65);font-weight:700;text-transform:uppercase}
+.end-stat-value{font-size:1.4rem;font-weight:900;letter-spacing:-.01em}
+.end-stat.score .end-stat-value{color:var(--orange)}
+.end-stat.rank.podium .end-stat-value{color:var(--vert)}
+.end-stat.rank .end-stat-value{color:#fff}
+.end-medal{display:inline-block;margin-right:.4rem;font-size:1.3rem}
+
+.end-message{font-size:.92rem;color:rgba(255,255,255,.7);line-height:1.6;font-weight:500;max-width:320px;background:rgba(247,167,32,.1);border-left:3px solid var(--orange);border-radius:0 10px 10px 0;padding:.85rem 1.1rem;text-align:left}
+.end-message strong{color:var(--orange);font-weight:800}
+
+/* === Footer démo === */
+.demo-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(0,0,0,.4);backdrop-filter:blur(10px);padding:.55rem 1rem;display:flex;align-items:center;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.55);letter-spacing:.06em;text-transform:uppercase;font-weight:700;border-top:1px solid rgba(255,255,255,.08);z-index:100}
+.demo-bar-tag{color:var(--orange);font-weight:800;letter-spacing:.15em}
+.demo-bar-action{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;padding:.3rem .8rem;border-radius:6px;font-size:.7rem;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:.06em;text-transform:uppercase}
+.demo-bar-action:active{background:rgba(255,255,255,.18)}
+
+/* === Petites adaptations pour très petits écrans === */
+@media (max-height: 640px){
+  .welcome-icon{font-size:3rem;margin-bottom:1rem}
+  .welcome-title{font-size:1.7rem}
+  .welcome-sub{margin-bottom:1.6rem}
+  .waiting-pulse{width:100px;height:100px;font-size:2.5rem;margin-bottom:1.4rem}
+  .feedback-result{width:100px;height:100px;font-size:2.8rem;margin-bottom:1.2rem}
+  .q-btn-letter{font-size:2.8rem}
+  .end-trophy{font-size:4rem;margin-bottom:1rem}
+  .end-title{font-size:1.7rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     ÉCRAN 1 — BIENVENUE / SAISIE DU PRÉNOM
+     ============================================================ -->
+<div class="screen active" id="screen-welcome">
+  <div class="app-header">
+    <div class="app-brand">
+      <div class="app-brand-circle">Q</div>
+      <div class="app-brand-text">Quiz IA · CDG88</div>
+    </div>
+  </div>
+
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;width:100%">
+    <div class="welcome-icon">🚀</div>
+    <h1 class="welcome-title">Prêt(e) pour le<br><span class="hl">quiz éclair</span> ?</h1>
+    <div class="welcome-sub">10 questions de la matinée. 30 secondes par question. Plus vous répondez vite, plus vous marquez de points.</div>
+
+    <div class="input-label">Votre prénom</div>
+    <input class="input-name" type="text" id="inputName" placeholder="Ex. Marie" maxlength="20" autocomplete="off" autocapitalize="words">
+    <button class="btn-join" id="btnJoin" onclick="joinQuiz()" disabled>Rejoindre le quiz</button>
+
+    <div class="welcome-rgpd">Aucune donnée n'est conservée — votre prénom et votre score seront effacés à la fin de la session.</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     ÉCRAN 2 — EN ATTENTE
+     ============================================================ -->
+<div class="screen" id="screen-waiting">
+  <div class="app-header">
+    <div class="app-brand">
+      <div class="app-brand-circle">Q</div>
+      <div class="app-brand-text">Quiz IA · CDG88</div>
+    </div>
+    <div class="app-user">Bonjour <strong id="userName">—</strong> 👋</div>
+  </div>
+
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center">
+    <div class="waiting-pulse">⏳</div>
+    <div class="waiting-title">En attente du formateur</div>
+    <div class="waiting-sub">Le quiz va démarrer dans quelques instants. Gardez votre téléphone à portée de main.</div>
+    <div class="waiting-tip">Astuce&nbsp;: regardez l'écran principal pour lire les questions — ici vous ne verrez que les couleurs.</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     ÉCRAN 3 — QUESTION EN COURS
+     ============================================================ -->
+<div class="screen" id="screen-question">
+  <div class="q-header">
+    <div class="q-num"><span id="qNum">Question 1</span> / 10</div>
+    <div class="q-timer" id="qTimer">
+      <span class="q-timer-icon">⏱</span>
+      <span id="qTimerValue">30</span>
+      <span style="font-size:.78rem;font-weight:700;opacity:.7;margin-left:-.15rem">s</span>
+    </div>
+  </div>
+
+  <div class="q-instruction">👀 Regardez l'<strong>écran principal</strong> pour la question, puis tapez la couleur</div>
+
+  <div class="q-grid">
+    <button class="q-btn a" data-letter="A" onclick="selectAnswer('A')">
+      <span class="q-btn-shape">▲</span>
+      <span class="q-btn-letter">A</span>
+    </button>
+    <button class="q-btn b" data-letter="B" onclick="selectAnswer('B')">
+      <span class="q-btn-shape">◆</span>
+      <span class="q-btn-letter">B</span>
+    </button>
+    <button class="q-btn c" data-letter="C" onclick="selectAnswer('C')">
+      <span class="q-btn-shape">●</span>
+      <span class="q-btn-letter">C</span>
+    </button>
+    <button class="q-btn d" data-letter="D" onclick="selectAnswer('D')">
+      <span class="q-btn-shape">■</span>
+      <span class="q-btn-letter">D</span>
+    </button>
+  </div>
+</div>
+
+<!-- ============================================================
+     ÉCRAN 4 — FEEDBACK (après réponse)
+     ============================================================ -->
+<div class="screen" id="screen-feedback">
+  <div class="app-header">
+    <div class="app-brand">
+      <div class="app-brand-circle">Q</div>
+      <div class="app-brand-text">Quiz IA · CDG88</div>
+    </div>
+    <div class="app-user"><strong id="userName2">—</strong></div>
+  </div>
+
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center">
+    <div class="feedback-result" id="feedbackIcon">✓</div>
+    <h2 class="feedback-title" id="feedbackTitle">Bonne réponse&nbsp;!</h2>
+    <div class="feedback-sub" id="feedbackSub">+&nbsp;825 points pour cette question</div>
+
+    <div class="feedback-card score">
+      <div class="feedback-card-label">Score total</div>
+      <div class="feedback-card-value" id="feedbackScore">825</div>
+    </div>
+    <div class="feedback-card rank">
+      <div class="feedback-card-label">Position actuelle</div>
+      <div class="feedback-card-value"><span id="feedbackRank">1</span><span class="rank-suffix">er / 5</span></div>
+    </div>
+
+    <div class="feedback-wait">En attente de la prochaine question…</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     ÉCRAN 5 — FIN DU QUIZ
+     ============================================================ -->
+<div class="screen" id="screen-end">
+  <div class="app-header">
+    <div class="app-brand">
+      <div class="app-brand-circle">Q</div>
+      <div class="app-brand-text">Quiz IA · CDG88</div>
+    </div>
+  </div>
+
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center">
+    <div class="end-trophy" id="endTrophy">🏆</div>
+    <h2 class="end-title" id="endTitle">Bravo&nbsp;!</h2>
+    <div class="end-sub" id="endSub">Vous avez terminé le quiz</div>
+
+    <div class="end-stats">
+      <div class="end-stat score">
+        <div class="end-stat-label">Votre score</div>
+        <div class="end-stat-value" id="endScore">7&nbsp;540</div>
+      </div>
+      <div class="end-stat rank" id="endRankRow">
+        <div class="end-stat-label">Votre place</div>
+        <div class="end-stat-value"><span id="endMedal" class="end-medal"></span><span id="endRank">2</span><span style="font-size:.95rem;color:rgba(255,255,255,.5);font-weight:600;margin-left:.2rem"> / 5</span></div>
+      </div>
+    </div>
+
+    <div class="end-message" id="endMessage">
+      <strong>Bien joué&nbsp;!</strong> Le formateur va vous montrer le top 3 sur l'écran principal.
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     BARRE DÉMO (visible uniquement en mode démo, pour navigation rapide)
+     ============================================================ -->
+<div class="demo-bar">
+  <div><span class="demo-bar-tag">Mode démo</span> · <span id="demoState">welcome</span></div>
+  <button class="demo-bar-action" onclick="resetDemo()">↻ Reset</button>
+</div>
+
+<script>
+// ============================================================
+// === CONFIGURATION FIREBASE ===
+// ============================================================
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyBGT1Tp-fQjbVHKRzvZNL85x9Pc8Rh5spo",
+  authDomain: "formation-ia---fpt.firebaseapp.com",
+  databaseURL: "https://formation-ia---fpt-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "formation-ia---fpt",
+  storageBucket: "formation-ia---fpt.firebasestorage.app",
+  messagingSenderId: "51337234699",
+  appId: "1:51337234699:web:9249c959f332ee014e7a0e"
+};
+
+firebase.initializeApp(FIREBASE_CONFIG);
+const db = firebase.database();
+
+// ============================================================
+// === RÉCUPÉRATION DE LA SESSION DEPUIS L'URL ===
+// ============================================================
+const urlParams = new URLSearchParams(window.location.search);
+const SESSION_ID = urlParams.get('session');
+
+if(!SESSION_ID){
+  // Pas de session dans l'URL → afficher un message d'erreur
+  document.body.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;padding:2rem;text-align:center;color:#fff;font-family:Inter,sans-serif"><div style="font-size:4rem;margin-bottom:1rem">🤔</div><h1 style="font-size:1.6rem;font-weight:900;margin-bottom:.6rem">Lien invalide</h1><p style="color:rgba(255,255,255,.7);font-size:.95rem;line-height:1.5;max-width:300px">Veuillez scanner le QR code affiché par le formateur pour rejoindre le quiz.</p></div>';
+  throw new Error('No session ID');
+}
+
+const sessionRef = db.ref('sessions/' + SESSION_ID);
+
+// ============================================================
+// === CONTENU DU QUIZ (mêmes 10 questions que la présentation) ===
+// ============================================================
+const QUIZ = [
+  {q:"En quelle année les bases mathématiques de l'IA ont-elles été posées ?",
+   a:["1945","1956","1980","2017"], correct:0},
+  {q:"Quel événement a rendu l'IA accessible au grand public ?",
+   a:["La sortie de l'iPhone","ChatGPT en novembre 2022","Google Search","Wikipédia"], correct:1},
+  {q:"Quel outil d'IA est français et héberge ses données en Europe ?",
+   a:["ChatGPT","Gemini","Le Chat (Mistral)","Perplexity"], correct:2},
+  {q:"Que signifie « hallucination » en IA ?",
+   a:["L'IA refuse de répondre","L'IA invente une réponse fausse avec assurance","L'IA est en panne","L'IA traduit mal"], correct:1},
+  {q:"Qu'est-ce qu'on NE doit JAMAIS mettre dans une IA grand public ?",
+   a:["Un texte de loi","Une question générale","Le nom et l'adresse d'un administré","Un brouillon sans nom"], correct:2},
+  {q:"Que veulent dire les 3 C de la règle de sécurité ?",
+   a:["Court · Clair · Concis","Confidentiel · Conforme · Contrôlé","Compétent · Capable · Curieux","Calme · Cool · Constant"], correct:1},
+  {q:"Quelle sanction maximale prévoit l'AI Act européen ?",
+   a:["1 million d'euros","10 millions d'euros","7 % du CA mondial ou 35 M€","Pas de sanction prévue"], correct:2},
+  {q:"Que signifie RCTF dans la rédaction d'un prompt ?",
+   a:["Rôle · Contexte · Tâche · Format","Rapide · Court · Tonique · Final","Réfléchir · Composer · Tester · Finaliser","Rédaction · Communication · Texte · Forme"], correct:0},
+  {q:"Selon les analogies vues ce matin, l'IA est… ?",
+   a:["Un cerveau supérieur au nôtre","Un GPS et un stagiaire de 150 de QI","Un moteur de recherche","Un secrétaire automatique"], correct:1},
+  {q:"Quelle est la première chose à faire après avoir créé son compte IA ?",
+   a:["Tester un prompt","Désactiver « entraînement du modèle » dans les paramètres","Inviter ses collègues","Acheter la version payante"], correct:1}
+];
+
+// ============================================================
+// === ÉTAT DE L'APPRENANT ===
+// ============================================================
+const STATE = {
+  participantId: null,
+  name: '',
+  score: 0,
+  currentQ: -1,
+  currentRank: 1,
+  totalParticipants: 0,
+  questionStart: 0,
+  selectedAnswer: null,
+  TOTAL_TIME: 30,
+  timeLeft: 30,
+  timerInterval: null,
+  sessionListener: null,
+  participantsListener: null,
+  hasVotedThisQuestion: false,
+  lastPointsEarned: 0,
+  lastIsCorrect: false
+};
+
+// ============================================================
+// === NAVIGATION ENTRE ÉCRANS ===
+// ============================================================
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + id).classList.add('active');
+  const demoEl = document.getElementById('demoState');
+  if(demoEl) demoEl.textContent = id;
+  if(navigator.vibrate) navigator.vibrate(20);
+}
+
+// ============================================================
+// === ÉCRAN 1 : Validation du prénom ===
+// ============================================================
+const inputEl = document.getElementById('inputName');
+const btnJoin = document.getElementById('btnJoin');
+inputEl.addEventListener('input', () => {
+  btnJoin.disabled = inputEl.value.trim().length < 2;
+});
+inputEl.addEventListener('keydown', (e) => {
+  if(e.key === 'Enter' && !btnJoin.disabled) joinQuiz();
+});
+
+function joinQuiz(){
+  STATE.name = inputEl.value.trim().substring(0, 20) || 'Anonyme';
+  document.getElementById('userName').textContent = STATE.name;
+  document.getElementById('userName2').textContent = STATE.name;
+
+  // Génère un ID participant unique
+  STATE.participantId = 'p_' + Math.random().toString(36).substring(2, 10);
+
+  // Vérifie d'abord que la session existe et n'est pas terminée
+  sessionRef.once('value').then((snapshot) => {
+    const sess = snapshot.val();
+    if(!sess){
+      alert("Cette session n'existe pas ou a été supprimée. Demandez au formateur de relancer le quiz.");
+      return;
+    }
+    if(sess.status === 'ended'){
+      alert("Le quiz est déjà terminé.");
+      return;
+    }
+
+    // Inscription du participant
+    sessionRef.child('participants/' + STATE.participantId).set({
+      name: STATE.name,
+      score: 0,
+      joinedAt: firebase.database.ServerValue.TIMESTAMP
+    }).then(() => {
+      // Détache l'inscription quand le navigateur ferme
+      sessionRef.child('participants/' + STATE.participantId).onDisconnect().remove();
+
+      showScreen('waiting');
+      startListening();
+    }).catch(e => {
+      console.error('Erreur inscription:', e);
+      alert("Impossible de rejoindre le quiz. Vérifiez votre connexion.");
+    });
+  }).catch(e => {
+    console.error('Erreur session:', e);
+    alert("Impossible de se connecter au quiz. Vérifiez votre connexion.");
+  });
+}
+
+// ============================================================
+// === ÉCOUTE DES CHANGEMENTS DE SESSION ===
+// ============================================================
+function startListening(){
+  // Écouter les changements de la session (changement de question, fin du quiz, etc.)
+  STATE.sessionListener = sessionRef;
+  STATE.sessionListener.on('value', (snapshot) => {
+    const sess = snapshot.val();
+    if(!sess) return;
+
+    // Mise à jour du nombre total de participants
+    STATE.totalParticipants = sess.participants ? Object.keys(sess.participants).length : 0;
+
+    // Mise à jour du score de l'utilisateur (en cas de modification côté formateur)
+    if(sess.participants && sess.participants[STATE.participantId]){
+      STATE.score = sess.participants[STATE.participantId].score || 0;
+    }
+
+    // Détection des transitions
+    if(sess.status === 'running' && sess.currentQuestion >= 0 && sess.currentQuestion !== STATE.currentQ){
+      STATE.currentQ = sess.currentQuestion;
+      STATE.hasVotedThisQuestion = false;
+      startQuestion();
+    } else if(sess.status === 'revealed' && STATE.currentQ === sess.currentQuestion){
+      // Révélation de la réponse → afficher le feedback
+      showFeedbackFromState(sess.correctAnswer);
+    } else if(sess.status === 'ended'){
+      endQuiz();
+    }
+  });
+}
+
+// ============================================================
+// === ÉCRAN 3 : Affichage et déroulement d'une question ===
+// ============================================================
+function startQuestion(){
+  const q = QUIZ[STATE.currentQ];
+  if(!q){ endQuiz(); return; }
+
+  // Reset état
+  STATE.selectedAnswer = null;
+  STATE.timeLeft = STATE.TOTAL_TIME;
+  STATE.questionStart = Date.now();
+
+  // UI
+  document.getElementById('qNum').textContent = 'Question ' + (STATE.currentQ + 1);
+  document.getElementById('qTimerValue').textContent = STATE.TOTAL_TIME;
+  document.getElementById('qTimer').classList.remove('warning');
+  document.querySelectorAll('.q-btn').forEach(b => {
+    b.classList.remove('locked','selected');
+  });
+
+  showScreen('question');
+
+  // Lancer le timer local
+  if(STATE.timerInterval) clearInterval(STATE.timerInterval);
+  STATE.timerInterval = setInterval(tickQuestionTimer, 1000);
+}
+
+function tickQuestionTimer(){
+  STATE.timeLeft--;
+  document.getElementById('qTimerValue').textContent = STATE.timeLeft;
+  if(STATE.timeLeft <= 5){
+    document.getElementById('qTimer').classList.add('warning');
+  }
+  if(STATE.timeLeft <= 0){
+    clearInterval(STATE.timerInterval);
+    STATE.timerInterval = null;
+    // Pas de réponse → l'apprenant doit attendre la révélation
+  }
+}
+
+// ============================================================
+// === SÉLECTION D'UNE RÉPONSE ===
+// ============================================================
+function selectAnswer(letter){
+  if(STATE.selectedAnswer !== null || STATE.hasVotedThisQuestion) return;
+  STATE.selectedAnswer = letter;
+  STATE.hasVotedThisQuestion = true;
+
+  // Verrouille les boutons
+  document.querySelectorAll('.q-btn').forEach(b => {
+    b.classList.add('locked');
+    if(b.dataset.letter === letter) b.classList.add('selected');
+  });
+
+  if(navigator.vibrate) navigator.vibrate([15, 30, 15]);
+
+  // Calcul du score (bonus rapidité)
+  const q = QUIZ[STATE.currentQ];
+  const correctLetter = ['A','B','C','D'][q.correct];
+  const elapsedSec = (Date.now() - STATE.questionStart) / 1000;
+  const speedBonus = Math.max(0, 1 - elapsedSec / STATE.TOTAL_TIME);
+  let pointsEarned = 0;
+  let isCorrect = false;
+  if(letter === correctLetter){
+    pointsEarned = Math.round(500 + speedBonus * 500);
+    isCorrect = true;
+  }
+
+  // Envoi du vote à Firebase
+  sessionRef.child('votes/q' + STATE.currentQ + '/' + STATE.participantId).set(letter);
+
+  // Mise à jour du score si bonne réponse
+  if(isCorrect){
+    const newScore = STATE.score + pointsEarned;
+    sessionRef.child('participants/' + STATE.participantId + '/score').set(newScore);
+    STATE.score = newScore;
+  }
+  // Mémoriser les points gagnés pour l'écran feedback
+  STATE.lastPointsEarned = pointsEarned;
+  STATE.lastIsCorrect = isCorrect;
+}
+
+// ============================================================
+// === ÉCRAN 4 : Feedback (déclenché par la révélation côté formateur) ===
+// ============================================================
+function computeRankFromParticipants(){
+  return new Promise((resolve) => {
+    sessionRef.child('participants').once('value').then(snapshot => {
+      const participants = snapshot.val() || {};
+      const list = Object.entries(participants);
+      const sorted = list.sort((a,b) => (b[1].score || 0) - (a[1].score || 0));
+      const idx = sorted.findIndex(([pid]) => pid === STATE.participantId);
+      resolve(idx >= 0 ? idx + 1 : 1);
+    });
+  });
+}
+
+// On adapte showFeedbackFromState pour utiliser une version asynchrone du rang
+async function showFeedbackFromState(correctLetter){
+  if(STATE.timerInterval){ clearInterval(STATE.timerInterval); STATE.timerInterval = null; }
+
+  const icon = document.getElementById('feedbackIcon');
+  const title = document.getElementById('feedbackTitle');
+  const sub = document.getElementById('feedbackSub');
+
+  icon.classList.remove('correct','wrong','timeout');
+
+  if(STATE.selectedAnswer === null){
+    icon.classList.add('timeout');
+    icon.textContent = '⌛';
+    title.textContent = 'Temps écoulé';
+    sub.textContent = 'Pas de points pour cette question';
+  } else if(STATE.selectedAnswer === correctLetter){
+    icon.classList.add('correct');
+    icon.textContent = '✓';
+    title.textContent = 'Bonne réponse !';
+    const pts = STATE.lastPointsEarned || 0;
+    sub.innerHTML = '+&nbsp;<strong style="color:var(--vert)">' + pts + '</strong> points pour cette question';
+  } else {
+    icon.classList.add('wrong');
+    icon.textContent = '✗';
+    title.textContent = 'Mauvaise réponse';
+    sub.textContent = 'Pas grave, on continue !';
+  }
+
+  document.getElementById('feedbackScore').textContent = STATE.score.toLocaleString('fr-FR').replace(/,/g, ' ');
+
+  // Calcul du rang
+  try {
+    const rank = await computeRankFromParticipants();
+    STATE.currentRank = rank;
+    const rankEl = document.getElementById('feedbackRank');
+    rankEl.textContent = rank;
+    rankEl.nextElementSibling.textContent = formatRank(rank) + ' / ' + STATE.totalParticipants;
+  } catch(e){
+    console.error('Erreur rang:', e);
+  }
+
+  showScreen('feedback');
+}
+
+function formatRank(n){
+  if(n === 1) return 'er';
+  return 'e';
+}
+
+// ============================================================
+// === ÉCRAN 5 : Fin du quiz ===
+// ============================================================
+async function endQuiz(){
+  // Score final
+  document.getElementById('endScore').textContent = STATE.score.toLocaleString('fr-FR').replace(/,/g, ' ');
+
+  // Position finale
+  let finalRank = 1;
+  try {
+    finalRank = await computeRankFromParticipants();
+  } catch(e){ console.error(e); }
+
+  document.getElementById('endRank').textContent = finalRank;
+  document.getElementById('endRankRow').classList.toggle('podium', finalRank <= 3);
+
+  const medal = ['🥇','🥈','🥉'][finalRank - 1] || '';
+  document.getElementById('endMedal').textContent = medal;
+
+  // Ajuster le suffixe " / N"
+  const rankRow = document.getElementById('endRankRow');
+  const suffixSpan = rankRow.querySelector('.end-stat-value > span:last-child');
+  if(suffixSpan && suffixSpan.textContent.includes('/')){
+    suffixSpan.textContent = ' / ' + STATE.totalParticipants;
+  }
+
+  // Message + trophée
+  const trophy = document.getElementById('endTrophy');
+  const title = document.getElementById('endTitle');
+  const sub = document.getElementById('endSub');
+  const message = document.getElementById('endMessage');
+
+  if(finalRank === 1){
+    trophy.textContent = '🏆';
+    title.textContent = 'Champion !';
+    sub.textContent = 'Quel score, ' + STATE.name + ' !';
+    message.innerHTML = '<strong>Félicitations !</strong> Vous êtes sur la première marche du podium. À vous l\'honneur de partager votre approche.';
+  } else if(finalRank === 2 || finalRank === 3){
+    trophy.textContent = finalRank === 2 ? '🥈' : '🥉';
+    title.textContent = 'Top 3 !';
+    sub.textContent = 'Bravo ' + STATE.name + ', vous êtes sur le podium !';
+    message.innerHTML = '<strong>Bien joué !</strong> Le formateur va afficher le classement complet sur l\'écran principal.';
+  } else {
+    trophy.textContent = '🎉';
+    title.textContent = 'Merci !';
+    sub.textContent = 'Vous avez terminé le quiz, ' + STATE.name + '.';
+    message.innerHTML = '<strong>Bien joué&nbsp;!</strong> L\'essentiel n\'est pas le score — c\'est ce qu\'on retient pour la suite. Direction la pratique sur vos cas réels.';
+  }
+
+  showScreen('end');
+
+  // Détache les listeners pour économiser la batterie
+  if(STATE.sessionListener){ STATE.sessionListener.off(); STATE.sessionListener = null; }
+}
+
+// ============================================================
+// === RESET (debug uniquement) ===
+// ============================================================
+function resetDemo(){
+  if(confirm("Recharger la page ?")) location.reload();
+}
+
+// ============================================================
+// === Cacher la barre démo en mode Firebase (production) ===
+// ============================================================
+const demoBar = document.querySelector('.demo-bar');
+if(demoBar) demoBar.style.display = 'none';
+</script>
+</body>
+</html>
