@@ -348,7 +348,68 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
 .s12-video-label::before{content:"▶";font-size:.75rem}
 .s12-video-wrap iframe{width:100%;flex:1;min-height:0;border:none;display:block}
 
-/* ===== SLIDE 13 — CAPACITÉS PAR MÉTIER ===== */
+/* --- SLIDE 13 : Interaction Image — Qui est l'artiste ? --- */
+.s13int-wrap{flex:1;display:grid;grid-template-columns:1.1fr 1fr;gap:3rem;align-items:center;padding:0 2vw}
+.s13int-left{display:flex;flex-direction:column;gap:1.4rem;justify-content:center}
+.s13int-eyebrow{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;font-weight:700;color:var(--rouge);display:flex;align-items:center;gap:.6rem}
+.s13int-eyebrow::before{content:"";width:32px;height:2px;background:var(--rouge)}
+.s13int-marks{font-size:4rem;color:var(--texte-sec);line-height:.6;font-family:Georgia,serif;font-weight:900;opacity:.35}
+.s13int-question{font-size:clamp(1.3rem,2.5vw,1.8rem);font-weight:700;font-style:italic;color:var(--navy);line-height:1.45;letter-spacing:-.01em}
+.s13int-question .hl{color:var(--rouge);font-style:normal;font-weight:800}
+.s13int-sub{font-size:1rem;color:var(--texte-sec);font-weight:600;line-height:1.5;padding-left:1rem;border-left:3px solid var(--texte-sec)}
+.s13int-right{display:flex;align-items:center;justify-content:center;position:relative}
+.s13int-portrait{width:min(340px,38vw);filter:drop-shadow(0 8px 30px rgba(39,42,95,.15))}
+.s13int-portrait-label{position:absolute;bottom:-1.2rem;left:50%;transform:translateX(-50%);font-size:.65rem;color:var(--texte-sec);font-style:italic;letter-spacing:.08em;white-space:nowrap}
+
+/* --- SLIDES IA VIDÉO --- */
+.svid-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;flex:1;min-height:0}
+.svid-left{display:flex;flex-direction:column;gap:1rem}
+.svid-tools{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.svid-tool{background:#fff;border-radius:12px;padding:.85rem .9rem;text-align:center;box-shadow:0 2px 8px rgba(39,42,95,.07);border-top:4px solid var(--navy);transition:transform .2s}
+.svid-tool:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(39,42,95,.12)}
+.svid-tool:nth-child(1){border-top-color:#10A37F}
+.svid-tool:nth-child(2){border-top-color:#0066ff}
+.svid-tool:nth-child(3){border-top-color:#e63946}
+.svid-tool-mark{font-size:1.6rem;margin-bottom:.3rem}
+.svid-tool-name{font-size:.9rem;font-weight:800;color:var(--navy)}
+.svid-tool-maker{font-size:.7rem;color:var(--texte-sec);letter-spacing:.05em;text-transform:uppercase;font-weight:600}
+.svid-right{display:flex;flex-direction:column;gap:.7rem}
+.svid-video-wrap{background:#000;border-radius:14px;overflow:hidden;box-shadow:0 6px 24px rgba(39,42,95,.2);flex:1;display:flex;flex-direction:column}
+.svid-video-label{font-size:.68rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);padding:.55rem 1rem;background:var(--navy);display:flex;align-items:center;gap:.5rem;flex-shrink:0}
+.svid-video-label::before{content:"▶";font-size:.7rem}
+.svid-video-wrap iframe{width:100%;flex:1;min-height:280px;border:none;display:block}
+.svid-callout{background:var(--navy);color:#fff;border-radius:10px;padding:.85rem 1.2rem;font-size:.9rem;font-style:italic;font-weight:500;line-height:1.45;display:flex;align-items:center;gap:.7rem;flex-shrink:0}
+.svid-callout::before{content:"💡";font-style:normal;font-size:1.1rem}
+.svid-callout strong{color:var(--orange);font-style:normal;font-weight:800}
+
+/* --- SLIDE 16 : IA dans les films --- */
+.sfilm-layout{display:grid;grid-template-columns:1.1fr 1fr;gap:1.4rem;flex:1;min-height:0;align-items:stretch}
+.sfilm-left{display:flex;flex-direction:column;gap:1rem}
+.sfilm-video-wrap{background:#000;border-radius:14px;overflow:hidden;box-shadow:0 6px 24px rgba(39,42,95,.2);flex:1;display:flex;flex-direction:column}
+.sfilm-video-label{font-size:.68rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);padding:.55rem 1rem;background:var(--navy);display:flex;align-items:center;gap:.5rem;flex-shrink:0}
+.sfilm-video-label::before{content:"🎬";font-size:.8rem}
+.sfilm-video-wrap iframe{width:100%;flex:1;min-height:220px;border:none;display:block}
+.sfilm-right{background:linear-gradient(135deg,#1a73e8 0%,#1557b0 100%);border-radius:16px;padding:1.6rem 1.5rem;display:flex;flex-direction:column;gap:1rem;color:#fff;box-shadow:0 6px 20px rgba(26,115,232,.3)}
+.sfilm-badge{font-size:.7rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.75);background:rgba(255,255,255,.12);padding:.4rem .9rem;border-radius:14px;width:fit-content}
+.sfilm-title{font-size:1.5rem;font-weight:900;color:#fff;line-height:1.15;letter-spacing:-.01em}
+.sfilm-sub{font-size:.92rem;color:rgba(255,255,255,.85);font-style:italic;line-height:1.55;padding:.9rem 1rem;background:rgba(255,255,255,.1);border-radius:10px;border-left:3px solid rgba(255,255,255,.4)}
+.sfilm-prime{display:inline-flex;align-items:center;gap:.6rem;background:#fff;border-radius:10px;padding:.5rem 1rem;width:fit-content}
+.sfilm-prime-text{font-size:.78rem;font-weight:700;color:#232f3e}
+.sfilm-prime-logo{font-size:1.4rem}
+.sfilm-key{font-size:.88rem;font-weight:600;color:rgba(255,255,255,.9);line-height:1.5;background:rgba(255,255,255,.08);border-radius:8px;padding:.8rem 1rem;margin-top:auto}
+.sfilm-key strong{color:#ffd700;display:block;margin-bottom:.2rem;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
+
+/* --- SLIDE 17 : Interaction Emploi --- */
+.sempl-wrap{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;padding:0 2vw}
+.sempl-left{display:flex;flex-direction:column;gap:1.4rem;justify-content:center}
+.sempl-eyebrow{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;font-weight:700;color:var(--rouge);display:flex;align-items:center;gap:.6rem}
+.sempl-eyebrow::before{content:"";width:32px;height:2px;background:var(--rouge)}
+.sempl-marks{font-size:4rem;color:var(--texte-sec);line-height:.6;font-family:Georgia,serif;font-weight:900;opacity:.25}
+.sempl-question{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;font-style:italic;color:var(--navy);line-height:1.35;letter-spacing:-.02em}
+.sempl-question .hl{color:var(--rouge);font-style:normal}
+.sempl-right{display:flex;align-items:center;justify-content:center}
+
+/* ===== SLIDE 18 — CAPACITÉS PAR MÉTIER ===== */
 .s13-rows{display:flex;flex-direction:column;gap:1rem;flex:1;min-height:0;margin-top:.5rem}
 .s13-row{background:#fff;border-radius:14px;padding:1.1rem 1.4rem;box-shadow:0 2px 6px rgba(39,42,95,.08);display:grid;grid-template-columns:240px 1fr;gap:1.4rem;align-items:center;border-left:5px solid var(--vert)}
 .s13-row.r2{border-left-color:var(--orange)}
@@ -366,7 +427,7 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
 .s13-action{background:var(--fond);border-radius:9px;padding:.7rem .8rem;display:flex;align-items:center;gap:.6rem;font-size:.82rem;line-height:1.3;color:var(--texte);font-weight:600}
 .s13-action-emoji{font-size:1.3rem;flex-shrink:0}
 
-/* ===== SLIDE 15 — COMMENT VOUS VOYEZ L'IA (refonte v2) ===== */
+/* ===== SLIDE 20 — COMMENT VOUS VOYEZ L'IA (refonte v2) ===== */
 .s15-wrap{flex:1;display:grid;grid-template-columns:.95fr 1.1fr;gap:2rem;align-items:center;min-height:0;padding:0 1vw}
 .s15-left{display:flex;flex-direction:column;gap:1.4rem;justify-content:center;max-width:560px}
 .s15-eyebrow{font-size:.75rem;letter-spacing:.22em;color:var(--rouge);font-weight:800;text-transform:uppercase;display:flex;align-items:center;gap:.6rem}
@@ -812,7 +873,7 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
 .quiz-replay-btn{display:inline-block;background:transparent;color:var(--navy);border:1.5px solid var(--navy);font-size:.85rem;font-weight:700;letter-spacing:.06em;padding:.5rem 1.2rem;border-radius:8px;cursor:pointer;margin-top:.8rem;font-family:inherit;text-transform:uppercase;transition:all .2s}
 .quiz-replay-btn:hover{background:var(--navy);color:#fff}
 
-/* ===== SLIDE 22 — AI ACT VUE D'ENSEMBLE (refonte complète) ===== */
+/* ===== SLIDE 27 — AI ACT VUE D'ENSEMBLE (refonte complète) ===== */
 .aia-overview-banner{background:linear-gradient(135deg,#e8f0fc 0%, #f3f7fd 100%);border:1.5px solid #c8d6f0;border-radius:14px;padding:1.3rem 1.6rem;display:grid;grid-template-columns:1fr auto;gap:1.2rem;align-items:center;margin-bottom:1.4rem}
 .aia-overview-text{font-size:1.05rem;color:var(--navy);line-height:1.5;font-weight:500}
 .aia-overview-text strong{color:#1e40af;font-weight:800}
@@ -1014,7 +1075,7 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
     </div>
 
     <img class="logo-cdg" id="logo2" alt="CDG88">
-    <div class="slide-counter">02 / 42</div>
+    <div class="slide-counter">02 / 47</div>
   </section>
 
   <!-- ============ SLIDE 3 — TRANSITION PARTIE 1 ============ -->
@@ -1068,7 +1129,7 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
       <div class="trans-hour">9h00 — 10h30</div>
     </div>
     <img class="logo-cdg" id="logo3" alt="CDG88">
-    <div class="slide-counter">03 / 42</div>
+    <div class="slide-counter">03 / 47</div>
   </section>
 
   <!-- ============ SLIDE 4 — TOUR DE TABLE ============ -->
@@ -1136,7 +1197,7 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
     </div>
 
     <img class="logo-cdg" id="logo4" alt="CDG88">
-    <div class="slide-counter">04 / 42</div>
+    <div class="slide-counter">04 / 47</div>
   </section>
 
   <!-- ============ SLIDE 5 — DEPUIS QUAND ============ -->
@@ -1161,7 +1222,7 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
     </div>
 
     <img class="logo-cdg" id="logo5" alt="CDG88">
-    <div class="slide-counter" style="color:rgba(255,255,255,.65)">05 / 42</div>
+    <div class="slide-counter" style="color:rgba(255,255,255,.65)">05 / 47</div>
   </section>
 
   <!-- ============ SLIDE 6 — CHRONOLOGIE ============ -->
@@ -1242,7 +1303,7 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
     </div>
 
     <img class="logo-cdg" id="logo6" alt="CDG88">
-    <div class="slide-counter">06 / 42</div>
+    <div class="slide-counter">06 / 47</div>
   </section>
 
   <!-- ============ SLIDE 7 — L'IA AUTOUR DE VOUS ============ -->
@@ -1288,7 +1349,7 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
     </div>
 
     <img class="logo-cdg" id="logo7" alt="CDG88">
-    <div class="slide-counter">07 / 42</div>
+    <div class="slide-counter">07 / 47</div>
   </section>
 
   <!-- ============ SLIDE 8 — ACTUALITÉ IA ============ -->
@@ -1331,7 +1392,7 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
     </div>
 
     <img class="logo-cdg" id="logo8" alt="CDG88">
-    <div class="slide-counter">08 / 42</div>
+    <div class="slide-counter">08 / 47</div>
   </section>
 
   <!-- ============ SLIDE 9 — TRANSITION : LES OUTILS ============ -->
@@ -1365,7 +1426,7 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
       <div class="trans-subtitle">« Il en existe des dizaines — vous n'en avez besoin que de 2 ou 3 »</div>
     </div>
     <img class="logo-cdg" id="logo9" alt="CDG88">
-    <div class="slide-counter">09 / 42</div>
+    <div class="slide-counter">09 / 47</div>
   </section>
 
   <!-- ============ SLIDE 10 — QUEL MODÈLE ============ -->
@@ -1413,7 +1474,7 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
     </div>
 
     <img class="logo-cdg" id="logo10" alt="CDG88">
-    <div class="slide-counter">10 / 42</div>
+    <div class="slide-counter">10 / 47</div>
   </section>
 
   <!-- ============ SLIDE 11 — LES 5 OUTILS À CONNAÎTRE ============ -->
@@ -1578,7 +1639,7 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
     </div>
 
     <img class="logo-cdg" id="logo11" alt="CDG88">
-    <div class="slide-counter">11 / 42</div>
+    <div class="slide-counter">11 / 47</div>
   </section>
   <!-- ============ SLIDE 12 — LES TYPES D'IA GÉNÉRATIVE ============ -->
   <section class="slide light" data-slide="12">
@@ -1636,11 +1697,330 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
     </div>
 
     <img class="logo-cdg" id="logo12" alt="CDG88">
-    <div class="slide-counter">12 / 42</div>
+    <div class="slide-counter">12 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 13 — CAPACITÉS PAR MÉTIER ============ -->
+
+  <!-- ============ SLIDE 13 — INTERACTION : QUI EST L'ARTISTE ? ============ -->
   <section class="slide light" data-slide="13">
+    <div class="nav-arrow">
+      <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
+      <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
+    </div>
+
+    <div class="badge-interaction"><span class="emoji">🙋</span> Interaction · Débat</div>
+
+    <div class="s13int-wrap">
+      <!-- Gauche : question -->
+      <div class="s13int-left">
+        <div class="s13int-eyebrow">IA Générative · Image</div>
+        <div class="s13int-marks">"</div>
+        <div class="s13int-question">
+          Si une image est générée par une IA<br>
+          à partir d'un prompt humain,<br>
+          <span class="hl">qui est l'artiste ?</span>
+        </div>
+        <div class="s13int-sub">
+          L'algorithme qui produit l'image,<br>ou l'humain qui a formulé l'intention ?
+        </div>
+      </div>
+
+      <!-- Droite : portrait Léonard de Vinci (SVG) -->
+      <div class="s13int-right">
+        <svg class="s13int-portrait" viewBox="0 0 300 380" xmlns="http://www.w3.org/2000/svg" aria-label="Portrait généré par IA">
+          <!-- Fond -->
+          <rect width="300" height="380" fill="#f0eee8" rx="12"/>
+          <!-- Ombre douce -->
+          <ellipse cx="150" cy="370" rx="90" ry="12" fill="rgba(0,0,0,.08)"/>
+          <!-- Corps / vêtement -->
+          <path d="M60 380 Q80 300 100 280 Q130 260 150 258 Q170 260 200 280 Q220 300 240 380Z" fill="#2a2520"/>
+          <path d="M100 280 Q120 310 150 315 Q180 310 200 280 L195 340 Q150 360 105 340Z" fill="#1a1510"/>
+          <!-- Col -->
+          <path d="M118 278 Q130 295 150 298 Q170 295 182 278" fill="none" stroke="#5a4a3a" stroke-width="2"/>
+          <!-- Cou -->
+          <rect x="135" y="238" width="30" height="45" rx="8" fill="#c8a882"/>
+          <!-- Tête -->
+          <ellipse cx="150" cy="195" rx="68" ry="78" fill="#c8a882"/>
+          <!-- Oreilles -->
+          <ellipse cx="84" cy="200" rx="12" ry="16" fill="#c0a07a"/>
+          <ellipse cx="216" cy="200" rx="12" ry="16" fill="#c0a07a"/>
+          <!-- Cheveux longs (côtés) -->
+          <path d="M84 185 Q60 220 65 270 Q75 300 90 310 Q95 280 92 240 Q88 215 84 185Z" fill="#6b5a3e"/>
+          <path d="M216 185 Q240 220 235 270 Q225 300 210 310 Q205 280 208 240 Q212 215 216 185Z" fill="#6b5a3e"/>
+          <!-- Cheveux haut -->
+          <path d="M90 150 Q110 118 150 115 Q190 118 210 150 Q195 130 150 126 Q105 130 90 150Z" fill="#5a4a2e"/>
+          <!-- Sourcils -->
+          <path d="M112 168 Q128 162 138 166" stroke="#4a3520" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M162 166 Q172 162 188 168" stroke="#4a3520" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <!-- Yeux -->
+          <ellipse cx="126" cy="178" rx="12" ry="8" fill="#fff"/>
+          <ellipse cx="174" cy="178" rx="12" ry="8" fill="#fff"/>
+          <circle cx="128" cy="178" r="5" fill="#3a2a18"/>
+          <circle cx="176" cy="178" r="5" fill="#3a2a18"/>
+          <circle cx="130" cy="176" r="1.5" fill="#fff"/>
+          <circle cx="178" cy="176" r="1.5" fill="#fff"/>
+          <!-- Paupières -->
+          <path d="M114 174 Q126 170 138 174" stroke="#4a3520" stroke-width="1.2" fill="none"/>
+          <path d="M162 174 Q174 170 186 174" stroke="#4a3520" stroke-width="1.2" fill="none"/>
+          <!-- Nez -->
+          <path d="M148 185 Q144 205 138 215 Q148 220 162 215 Q156 205 152 185Z" fill="#b89060" opacity=".6"/>
+          <!-- Moustache -->
+          <path d="M128 228 Q140 222 150 224 Q160 222 172 228 Q163 235 150 232 Q137 235 128 228Z" fill="#5a4530"/>
+          <!-- Barbe longue -->
+          <path d="M100 245 Q88 270 90 300 Q100 340 110 360 Q130 375 150 378 Q170 375 190 360 Q200 340 210 300 Q212 270 200 245 Q185 260 170 268 Q160 272 150 272 Q140 272 130 268 Q115 260 100 245Z" fill="#6b5a3e"/>
+          <!-- Détails barbe (mèches) -->
+          <path d="M108 260 Q105 300 108 340" stroke="#5a4a2e" stroke-width="1" fill="none" opacity=".5"/>
+          <path d="M125 270 Q120 310 122 355" stroke="#5a4a2e" stroke-width="1" fill="none" opacity=".5"/>
+          <path d="M150 272 Q148 315 150 370" stroke="#5a4a2e" stroke-width="1" fill="none" opacity=".5"/>
+          <path d="M175 270 Q180 310 178 355" stroke="#5a4a2e" stroke-width="1" fill="none" opacity=".5"/>
+          <path d="M192 260 Q195 300 192 340" stroke="#5a4a2e" stroke-width="1" fill="none" opacity=".5"/>
+          <!-- Bouche -->
+          <path d="M136 228 Q150 234 164 228" stroke="#9a7a5a" stroke-width="1.5" fill="none"/>
+        </svg>
+        <div class="s13int-portrait-label">Portrait généré par IA · Claude + Midjourney</div>
+      </div>
+    </div>
+
+    <img class="logo-cdg" id="logo13" alt="CDG88">
+    <div class="slide-counter">13 / 47</div>
+  </section>
+
+
+  <!-- ============ SLIDE 14 — IA VIDÉO : LES OUTILS ============ -->
+  <section class="slide light" data-slide="14">
+    <div class="nav-arrow">
+      <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
+      <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
+    </div>
+
+    <h2 class="s2-title"><span class="bar"></span>IA Générative · Vidéo</h2>
+    <div class="s2-subtitle">Des outils qui génèrent des vidéos réalistes à partir d'une phrase</div>
+
+    <div class="svid-layout">
+      <!-- Colonne gauche : outils + callout -->
+      <div class="svid-left">
+        <div class="svid-tools">
+          <div class="svid-tool">
+            <div class="svid-tool-mark">🤖</div>
+            <div class="svid-tool-name">Sora</div>
+            <div class="svid-tool-maker">OpenAI · USA</div>
+          </div>
+          <div class="svid-tool">
+            <div class="svid-tool-mark">🎬</div>
+            <div class="svid-tool-name">KlingAI</div>
+            <div class="svid-tool-maker">Kuaishou · Chine</div>
+          </div>
+          <div class="svid-tool">
+            <div class="svid-tool-mark">🎞️</div>
+            <div class="svid-tool-name">Runway</div>
+            <div class="svid-tool-maker">Runway · USA</div>
+          </div>
+        </div>
+
+        <div style="background:#fff;border-radius:14px;padding:1.2rem 1.4rem;box-shadow:0 2px 8px rgba(39,42,95,.07);flex:1;display:flex;flex-direction:column;gap:.8rem">
+          <div style="font-size:.72rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--rouge)">Exemples réels</div>
+          <div style="display:flex;flex-direction:column;gap:.65rem">
+            <div style="display:flex;align-items:flex-start;gap:.8rem;font-size:.9rem;color:var(--texte);line-height:1.45">
+              <span style="font-size:1.3rem;flex-shrink:0">🚗</span>
+              <div><strong style="color:var(--navy);display:block;font-weight:700">Publicité automobile</strong>Voiture dans un safari africain — générée par <em>Veo (Google)</em></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:.8rem;font-size:.9rem;color:var(--texte);line-height:1.45">
+              <span style="font-size:1.3rem;flex-shrink:0">🎬</span>
+              <div><strong style="color:var(--navy);display:block;font-weight:700">Série TV — House of David</strong>VFX d'Amazon Prime Video produits par 3 Français avec Midjourney, Kling &amp; Runway</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:.8rem;font-size:.9rem;color:var(--texte);line-height:1.45">
+              <span style="font-size:1.3rem;flex-shrink:0">🌊</span>
+              <div><strong style="color:var(--navy);display:block;font-weight:700">Clips &amp; courts métrages</strong>Générer une scène de toutes pièces en quelques minutes</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="svid-callout">« Ce qui coûtait <strong>100 000 €</strong> en effets spéciaux se fait maintenant pour quelques euros. »</div>
+      </div>
+
+      <!-- Colonne droite : vidéo YouTube -->
+      <div class="svid-right">
+        <div class="svid-video-wrap">
+          <div class="svid-video-label">Exemple — Pub voiture générée par IA (Veo · Google)</div>
+          <iframe
+            src="https://www.youtube.com/embed/T-8Cr62Nmvs?rel=0&modestbranding=1"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            title="Exemple vidéo générée par IA — voiture">
+          </iframe>
+        </div>
+      </div>
+    </div>
+
+    <img class="logo-cdg" id="logo14" alt="CDG88">
+    <div class="slide-counter">14 / 47</div>
+  </section>
+
+  <!-- ============ SLIDE 15 — IA VIDÉO : INTERACTION ============ -->
+  <section class="slide dark" data-slide="15">
+    <div class="deco-dots"></div>
+    <div class="nav-arrow">
+      <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
+      <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
+    </div>
+
+    <div class="badge-interaction" style="background:var(--orange);margin-bottom:1.2rem"><span class="emoji">🙋</span> Interaction · Débat</div>
+
+    <div class="s13int-wrap">
+      <div class="s13int-left">
+        <div class="s13int-eyebrow" style="color:var(--orange)">IA Générative · Vidéo</div>
+        <div class="s13int-marks" style="color:rgba(255,255,255,.3)">"</div>
+        <div class="s13int-question" style="color:#fff">
+          Un journaliste peut-il publier<br>
+          une vidéo <span style="color:var(--orange);font-style:normal;font-weight:800">générée par IA</span><br>
+          sans le mentionner ?
+        </div>
+        <div class="s13int-sub" style="color:rgba(255,255,255,.75);border-left-color:var(--orange)">
+          Deepfake, désinformation, transparence algorithmique…<br>Où est la limite pour une collectivité ?
+        </div>
+      </div>
+      <div class="s13int-right">
+        <div style="background:rgba(255,255,255,.06);border:1.5px solid rgba(247,167,32,.3);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1.2rem;width:min(340px,38vw)">
+          <div style="font-size:.72rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--orange)">Points de débat</div>
+          <div style="display:flex;flex-direction:column;gap:.85rem">
+            <div style="font-size:.95rem;color:rgba(255,255,255,.88);line-height:1.5;display:flex;gap:.7rem"><span style="color:var(--orange);font-weight:900">→</span>L'IA Act impose d'étiqueter les contenus générés par IA</div>
+            <div style="font-size:.95rem;color:rgba(255,255,255,.88);line-height:1.5;display:flex;gap:.7rem"><span style="color:var(--orange);font-weight:900">→</span>Une mairie qui utilise une image IA dans sa communication engage sa responsabilité</div>
+            <div style="font-size:.95rem;color:rgba(255,255,255,.88);line-height:1.5;display:flex;gap:.7rem"><span style="color:var(--orange);font-weight:900">→</span>Le public a-t-il le droit de savoir ?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <img class="logo-cdg" id="logo15" alt="CDG88" style="filter:brightness(0) invert(1);opacity:.85">
+    <div class="slide-counter">15 / 47</div>
+  </section>
+
+
+  <!-- ============ SLIDE 16 — IA DANS LES FILMS ============ -->
+  <section class="slide light" data-slide="16">
+    <div class="nav-arrow">
+      <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
+      <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
+    </div>
+
+    <h2 class="s2-title"><span class="bar"></span>L'IA s'invite au cinéma</h2>
+    <div class="s2-subtitle">3 Français révolutionnent Hollywood avec l'IA générative</div>
+
+    <div class="sfilm-layout">
+      <!-- Gauche : vidéo YouTube Comptoir IA / House of David -->
+      <div class="sfilm-left">
+        <div class="sfilm-video-wrap">
+          <div class="sfilm-video-label">3 Français font les VFX d'une série Amazon grâce à l'IA</div>
+          <iframe
+            src="https://www.youtube.com/embed/kY35UB6yh5Y?rel=0&modestbranding=1&start=0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            title="House of David — VFX IA">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- Droite : carte House of David -->
+      <div class="sfilm-right">
+        <div class="sfilm-badge">Amazon Prime Video · 2024</div>
+        <div class="sfilm-title">House of David</div>
+        <div style="font-size:.92rem;color:rgba(255,255,255,.8);font-weight:500">L'IA au cœur des effets visuels</div>
+        <div class="sfilm-sub">
+          « Chaque artiste disposait de ses propres outils IA génératifs (Midjourney, Kling, Runway…) adaptés à l'esthétique de la série »
+        </div>
+        <div class="sfilm-prime">
+          <span class="sfilm-prime-logo">📺</span>
+          <span class="sfilm-prime-text">Amazon Prime Video</span>
+        </div>
+        <div class="sfilm-key">
+          <strong>À retenir</strong>
+          Des professionnels du cinéma remplacent des studios entiers d'effets spéciaux grâce à 3 outils IA. Ce qui coûtait des millions se fait à présent en quelques jours.
+        </div>
+      </div>
+    </div>
+
+    <img class="logo-cdg" id="logo16" alt="CDG88">
+    <div class="slide-counter">16 / 47</div>
+  </section>
+
+  <!-- ============ SLIDE 17 — INTERACTION : IMPACT SUR L'EMPLOI ============ -->
+  <section class="slide light" data-slide="17">
+    <div class="nav-arrow">
+      <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
+      <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
+    </div>
+
+    <div class="badge-interaction"><span class="emoji">🙋</span> Interaction · Débat</div>
+
+    <div class="sempl-wrap">
+      <!-- Gauche : question -->
+      <div class="sempl-left">
+        <div class="sempl-eyebrow">IA &amp; Société</div>
+        <div class="sempl-marks">"</div>
+        <div class="sempl-question">
+          Quel impact l'IA<br>aura-t-elle sur<br><span class="hl">l'emploi ?</span>
+        </div>
+      </div>
+
+      <!-- Droite : balance SVG -->
+      <div class="sempl-right">
+        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" style="width:min(380px,42vw);filter:drop-shadow(0 6px 20px rgba(39,42,95,.1))">
+          <!-- Socle -->
+          <rect x="188" y="270" width="24" height="20" rx="4" fill="#2a2a4a"/>
+          <rect x="160" y="285" width="80" height="10" rx="5" fill="#2a2a4a"/>
+          <!-- Mât vertical -->
+          <rect x="197" y="120" width="6" height="155" rx="3" fill="#3a3a6a"/>
+          <!-- Pivot central -->
+          <circle cx="200" cy="120" r="10" fill="#272A5F"/>
+          <!-- Barre horizontale (légèrement inclinée vers la droite = humains plus lourds) -->
+          <line x1="60" y1="140" x2="340" y2="115" stroke="#272A5F" stroke-width="5" stroke-linecap="round"/>
+          <!-- Chaîne gauche (robot) -->
+          <line x1="100" y1="140" x2="100" y2="185" stroke="#4a4a8a" stroke-width="2.5" stroke-dasharray="5,3"/>
+          <!-- Plateforme gauche (robot) -->
+          <rect x="60" y="185" width="80" height="8" rx="4" fill="#4285F4"/>
+          <!-- Robot SVG simplifié -->
+          <rect x="82" y="145" width="36" height="30" rx="6" fill="#4285F4"/>
+          <rect x="88" y="135" width="24" height="20" rx="5" fill="#5294f4"/>
+          <circle cx="96" cy="145" r="4" fill="#fff"/>
+          <circle cx="104" cy="145" r="4" fill="#fff"/>
+          <circle cx="96" cy="145" r="2" fill="#1a73e8"/>
+          <circle cx="104" cy="145" r="2" fill="#1a73e8"/>
+          <rect x="80" y="155" width="8" height="18" rx="3" fill="#3a74d4"/>
+          <rect x="112" y="155" width="8" height="18" rx="3" fill="#3a74d4"/>
+          <rect x="86" y="175" width="10" height="10" rx="2" fill="#3a74d4"/>
+          <rect x="104" y="175" width="10" height="10" rx="2" fill="#3a74d4"/>
+          <!-- Antenne -->
+          <line x1="100" y1="135" x2="100" y2="125" stroke="#5294f4" stroke-width="2"/>
+          <circle cx="100" cy="122" r="3" fill="#F7A720"/>
+          <!-- Cercle bleu autour robot -->
+          <circle cx="100" cy="165" r="48" fill="none" stroke="#4285F4" stroke-width="2" stroke-dasharray="8,4" opacity=".6"/>
+
+          <!-- Chaîne droite (humains) -->
+          <line x1="300" y1="115" x2="300" y2="160" stroke="#4a4a8a" stroke-width="2.5" stroke-dasharray="5,3"/>
+          <!-- Plateforme droite (humains) -->
+          <rect x="260" y="160" width="80" height="8" rx="4" fill="#F7A720"/>
+          <!-- Groupe de 3 humains SVG -->
+          <!-- Personne centrale -->
+          <circle cx="300" cy="125" r="10" fill="#272A5F"/>
+          <rect x="292" y="135" width="16" height="20" rx="4" fill="#272A5F"/>
+          <!-- Personne gauche -->
+          <circle cx="278" cy="128" r="8" fill="#3a3a6a"/>
+          <rect x="271" y="136" width="14" height="18" rx="4" fill="#3a3a6a"/>
+          <!-- Personne droite -->
+          <circle cx="322" cy="128" r="8" fill="#3a3a6a"/>
+          <rect x="315" y="136" width="14" height="18" rx="4" fill="#3a3a6a"/>
+          <!-- Cercle orange autour humains -->
+          <circle cx="300" cy="138" r="50" fill="none" stroke="#F7A720" stroke-width="2" stroke-dasharray="8,4" opacity=".6"/>
+        </svg>
+      </div>
+    </div>
+
+    <img class="logo-cdg" id="logo17" alt="CDG88">
+    <div class="slide-counter">17 / 47</div>
+  </section>
+
+  <!-- ============ SLIDE 18 — CAPACITÉS PAR MÉTIER ============ -->
+  <section class="slide light" data-slide="18">
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
       <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
@@ -1693,12 +2073,12 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
       </div>
     </div>
 
-    <img class="logo-cdg" id="logo13" alt="CDG88">
-    <div class="slide-counter">13 / 42</div>
+    <img class="logo-cdg" id="logo18" alt="CDG88">
+    <div class="slide-counter">18 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 14 — TRANSITION POSTURE ============ -->
-  <section class="slide dark" data-slide="14">
+  <!-- ============ SLIDE 19 — TRANSITION POSTURE ============ -->
+  <section class="slide dark" data-slide="19">
     <div class="deco-dots"></div>
     <svg class="deco-network" viewBox="0 0 420 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <g stroke="rgba(255,255,255,.35)" stroke-width="1" fill="none">
@@ -1727,12 +2107,12 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
       <h2 class="trans-title">Ce que l'IA<br>fait <span class="hl">bien</span><br>— et ce qu'elle ne fera jamais</h2>
       <div class="trans-subtitle">« Comprendre ses forces et ses limites avant de lui faire confiance »</div>
     </div>
-    <img class="logo-cdg" id="logo14" alt="CDG88">
-    <div class="slide-counter">14 / 42</div>
+    <img class="logo-cdg" id="logo19" alt="CDG88">
+    <div class="slide-counter">19 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 14 — COMMENT VOUS VOYEZ L'IA ============ -->
-  <section class="slide light" data-slide="15">
+  <!-- ============ SLIDE 19 — COMMENT VOUS VOYEZ L'IA ============ -->
+  <section class="slide light" data-slide="20">
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
       <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
@@ -1803,12 +2183,12 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
       </div>
     </div>
 
-    <img class="logo-cdg" id="logo15" alt="CDG88">
-    <div class="slide-counter">15 / 42</div>
+    <img class="logo-cdg" id="logo20" alt="CDG88">
+    <div class="slide-counter">20 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 16 — L'IA COMME SUPER ASSISTANT ============ -->
-  <section class="slide light" data-slide="16">
+  <!-- ============ SLIDE 21 — L'IA COMME SUPER ASSISTANT ============ -->
+  <section class="slide light" data-slide="21">
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
       <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
@@ -1837,12 +2217,12 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
       </div>
       <div class="s16-callout">Vous pouvez lui poser une question « bête ». Elle ne sera jamais vexée.</div>
     </div>
-    <img class="logo-cdg" id="logo16" alt="CDG88">
-    <div class="slide-counter">16 / 42</div>
+    <img class="logo-cdg" id="logo21" alt="CDG88">
+    <div class="slide-counter">21 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 17 — LE SPECTRE DES TÂCHES ============ -->
-  <section class="slide light" data-slide="17">
+  <!-- ============ SLIDE 22 — LE SPECTRE DES TÂCHES ============ -->
+  <section class="slide light" data-slide="22">
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
       <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
@@ -1879,12 +2259,12 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
       </table>
       <div class="s17-note">Exercice oral — où placeriez-vous la tâche chronophage que vous avez citée au tour de table&nbsp;?</div>
     </div>
-    <img class="logo-cdg" id="logo17" alt="CDG88">
-    <div class="slide-counter">17 / 42</div>
+    <img class="logo-cdg" id="logo22" alt="CDG88">
+    <div class="slide-counter">22 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 18 — TRANSITION : LES LIMITES (DARK) ============ -->
-  <section class="slide dark" data-slide="18">
+  <!-- ============ SLIDE 23 — TRANSITION : LES LIMITES (DARK) ============ -->
+  <section class="slide dark" data-slide="23">
     <div class="deco-dots"></div>
     <svg class="deco-network" viewBox="0 0 420 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <g stroke="rgba(255,255,255,.3)" stroke-width="1" fill="none">
@@ -1907,12 +2287,12 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
       <h2 class="trans-title">L'IA est <span class="hl">puissante.</span><br>Mais elle peut<br>vous piéger.</h2>
       <div class="trans-subtitle">« 3 règles d'or pour l'utiliser sans risque »</div>
     </div>
-    <img class="logo-cdg" id="logo18" alt="CDG88">
-    <div class="slide-counter">18 / 42</div>
+    <img class="logo-cdg" id="logo23" alt="CDG88">
+    <div class="slide-counter">23 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 19 — LES 3 RISQUES ============ -->
-  <section class="slide light" data-slide="19">
+  <!-- ============ SLIDE 24 — LES 3 RISQUES ============ -->
+  <section class="slide light" data-slide="24">
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
       <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
@@ -1939,12 +2319,12 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
         <div class="s19-card-text">Elle ne dit jamais « je ne sais pas ». Elle invente plutôt — c'est <strong>une hallucination</strong>. Vérifiez toujours avant d'utiliser.</div>
       </div>
     </div>
-    <img class="logo-cdg" id="logo19" alt="CDG88">
-    <div class="slide-counter">19 / 42</div>
+    <img class="logo-cdg" id="logo24" alt="CDG88">
+    <div class="slide-counter">24 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 20 — LE FEU TRICOLORE DES DONNÉES ============ -->
-  <section class="slide light" data-slide="20">
+  <!-- ============ SLIDE 25 — LE FEU TRICOLORE DES DONNÉES ============ -->
+  <section class="slide light" data-slide="25">
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
       <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
@@ -1983,12 +2363,12 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
       </div>
     </div>
     <div class="s20-callout">En cas de doute : supprimez les noms et données personnelles avant de coller le texte dans l'IA.</div>
-    <img class="logo-cdg" id="logo20" alt="CDG88">
-    <div class="slide-counter">20 / 42</div>
+    <img class="logo-cdg" id="logo25" alt="CDG88">
+    <div class="slide-counter">25 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 21 — LA RÈGLE DES 3C ============ -->
-  <section class="slide light" data-slide="21">
+  <!-- ============ SLIDE 26 — LA RÈGLE DES 3C ============ -->
+  <section class="slide light" data-slide="26">
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
       <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
@@ -2019,12 +2399,12 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
       </div>
     </div>
     <div class="s21-note">Faire répéter les 3C à voix haute — ancrage mnémotechnique simple et efficace</div>
-    <img class="logo-cdg" id="logo21" alt="CDG88">
-    <div class="slide-counter">21 / 42</div>
+    <img class="logo-cdg" id="logo26" alt="CDG88">
+    <div class="slide-counter">26 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 21 — AI ACT VUE D'ENSEMBLE ============ -->
-  <section class="slide light" data-slide="22">
+  <!-- ============ SLIDE 26 — AI ACT VUE D'ENSEMBLE ============ -->
+  <section class="slide light" data-slide="27">
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
       <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
@@ -2066,12 +2446,12 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
       </div>
     </div>
 
-    <img class="logo-cdg" id="logo22" alt="CDG88">
-    <div class="slide-counter">22 / 42</div>
+    <img class="logo-cdg" id="logo27" alt="CDG88">
+    <div class="slide-counter">27 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 23 — IA À HAUT RISQUE : SECTEURS ============ -->
-  <section class="slide light" data-slide="23">
+  <!-- ============ SLIDE 28 — IA À HAUT RISQUE : SECTEURS ============ -->
+  <section class="slide light" data-slide="28">
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
       <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
@@ -2114,12 +2494,12 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
       </div>
     </div>
 
-    <img class="logo-cdg" id="logo23" alt="CDG88">
-    <div class="slide-counter">23 / 42</div>
+    <img class="logo-cdg" id="logo28" alt="CDG88">
+    <div class="slide-counter">28 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 24 — OBLIGATIONS LÉGALES (ARTICLES) ============ -->
-  <section class="slide light" data-slide="24">
+  <!-- ============ SLIDE 29 — OBLIGATIONS LÉGALES (ARTICLES) ============ -->
+  <section class="slide light" data-slide="29">
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
       <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
@@ -2162,12 +2542,12 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
 
     <div class="aia-source">Source&nbsp;: <strong>Dreyfus.fr</strong></div>
 
-    <img class="logo-cdg" id="logo24" alt="CDG88">
-    <div class="slide-counter">24 / 42</div>
+    <img class="logo-cdg" id="logo29" alt="CDG88">
+    <div class="slide-counter">29 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 25 — QUESTION OUVERTE : PROPRIÉTÉ INTELLECTUELLE (DARK) ============ -->
-  <section class="slide dark" data-slide="25">
+  <!-- ============ SLIDE 30 — QUESTION OUVERTE : PROPRIÉTÉ INTELLECTUELLE (DARK) ============ -->
+  <section class="slide dark" data-slide="30">
     <div class="deco-dots"></div>
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
@@ -2220,12 +2600,12 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
         <div class="aia-quote-portrait-label">Le penseur · IA &amp; création</div>
       </div>
     </div>
-    <img class="logo-cdg" id="logo25" alt="CDG88">
-    <div class="slide-counter">25 / 42</div>
+    <img class="logo-cdg" id="logo30" alt="CDG88">
+    <div class="slide-counter">30 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 26 — RÈGLE D'OR : LE GPS (DARK) ============ -->
-  <section class="slide dark" data-slide="26">
+  <!-- ============ SLIDE 31 — RÈGLE D'OR : LE GPS (DARK) ============ -->
+  <section class="slide dark" data-slide="31">
     <div class="deco-dots"></div>
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
@@ -2242,12 +2622,12 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
       </div>
       <div class="s23-callout">L'IA doit être un allié intelligent — jamais un substitut à votre jugement.</div>
     </div>
-    <img class="logo-cdg" id="logo26" alt="CDG88">
-    <div class="slide-counter">26 / 42</div>
+    <img class="logo-cdg" id="logo31" alt="CDG88">
+    <div class="slide-counter">31 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 27 — ☕ PAUSE 10H30 (DARK) ============ -->
-  <section class="slide dark" data-slide="27">
+  <!-- ============ SLIDE 32 — ☕ PAUSE 10H30 (DARK) ============ -->
+  <section class="slide dark" data-slide="32">
     <div class="deco-dots"></div>
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
@@ -2260,12 +2640,12 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
       <div class="pause-box">Pendant la pause : pensez à une tâche répétitive de votre semaine dernière. On l'utilisera tout à l'heure pour rédiger votre premier prompt.</div>
       <div class="pause-next">Après la pause : Maîtriser le prompting &amp; Découverte des outils</div>
     </div>
-    <img class="logo-cdg" id="logo27" alt="CDG88">
-    <div class="slide-counter">27 / 42</div>
+    <img class="logo-cdg" id="logo32" alt="CDG88">
+    <div class="slide-counter">32 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 28 — TRANSITION PARTIE 2 : LE PROMPTING (DARK) ============ -->
-  <section class="slide dark" data-slide="28">
+  <!-- ============ SLIDE 33 — TRANSITION PARTIE 2 : LE PROMPTING (DARK) ============ -->
+  <section class="slide dark" data-slide="33">
     <div class="deco-dots"></div>
     <svg class="deco-network" viewBox="0 0 420 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <g stroke="rgba(255,255,255,.35)" stroke-width="1" fill="none">
@@ -2290,12 +2670,12 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
       <div class="trans-subtitle">« L'art de la bonne demande »</div>
       <div class="trans-hour">10h45 – 12h30</div>
     </div>
-    <img class="logo-cdg" id="logo28" alt="CDG88">
-    <div class="slide-counter">28 / 42</div>
+    <img class="logo-cdg" id="logo33" alt="CDG88">
+    <div class="slide-counter">33 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 29 — L'IA = STAGIAIRE 150 QI ============ -->
-  <section class="slide light" data-slide="29">
+  <!-- ============ SLIDE 34 — L'IA = STAGIAIRE 150 QI ============ -->
+  <section class="slide light" data-slide="34">
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
       <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
@@ -2321,12 +2701,12 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
         <div class="s26-pt-text">Vous pouvez lui dire <strong>« c'est pas bon, recommence »</strong> — il ne sera jamais vexé.</div>
       </div>
     </div>
-    <img class="logo-cdg" id="logo29" alt="CDG88">
-    <div class="slide-counter">29 / 42</div>
+    <img class="logo-cdg" id="logo34" alt="CDG88">
+    <div class="slide-counter">34 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 30 — FRAMEWORK RCTF ============ -->
-  <section class="slide light" data-slide="30">
+  <!-- ============ SLIDE 35 — FRAMEWORK RCTF ============ -->
+  <section class="slide light" data-slide="35">
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
       <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
@@ -2364,12 +2744,12 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
       </div>
     </div>
     <div class="s27-callout">Vous n'avez pas besoin des 4 éléments à chaque fois — mais plus vous en donnez, meilleur sera le résultat.</div>
-    <img class="logo-cdg" id="logo30" alt="CDG88">
-    <div class="slide-counter">30 / 42</div>
+    <img class="logo-cdg" id="logo35" alt="CDG88">
+    <div class="slide-counter">35 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 31 — EXEMPLE DE PROMPT COMPLET ============ -->
-  <section class="slide light" data-slide="31">
+  <!-- ============ SLIDE 36 — EXEMPLE DE PROMPT COMPLET ============ -->
+  <section class="slide light" data-slide="36">
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
       <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
@@ -2411,12 +2791,12 @@ en gras. Ton professionnel et courtois.
         <div class="s28-note">Tester ce prompt en direct sur l'outil projeté. L'IA produit un brouillon à améliorer — pas une réponse définitive.</div>
       </div>
     </div>
-    <img class="logo-cdg" id="logo31" alt="CDG88">
-    <div class="slide-counter">31 / 42</div>
+    <img class="logo-cdg" id="logo36" alt="CDG88">
+    <div class="slide-counter">36 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 32 — MÊME PROMPT CODÉ RCTF ============ -->
-  <section class="slide light" data-slide="32">
+  <!-- ============ SLIDE 37 — MÊME PROMPT CODÉ RCTF ============ -->
+  <section class="slide light" data-slide="37">
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
       <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
@@ -2436,12 +2816,12 @@ en gras. Ton professionnel et courtois.
       <div class="s29-block s29-hl-f"><strong>FORMAT :</strong> Titre clair et officiel. Paragraphes courts. Horaires et rues en gras. Ton professionnel et courtois. 1 page max prête à imprimer.</div>
     </div>
     <div class="s29-callout">Vous reconnaissez les 4 lettres de RCTF&nbsp;? Voilà à quoi ressemble un bon prompt.</div>
-    <img class="logo-cdg" id="logo32" alt="CDG88">
-    <div class="slide-counter">32 / 42</div>
+    <img class="logo-cdg" id="logo37" alt="CDG88">
+    <div class="slide-counter">37 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 33 — TRANSITION PARTIE 3 (DARK) ============ -->
-  <section class="slide dark" data-slide="33">
+  <!-- ============ SLIDE 38 — TRANSITION PARTIE 3 (DARK) ============ -->
+  <section class="slide dark" data-slide="38">
     <div class="deco-dots"></div>
     <svg class="deco-network" viewBox="0 0 420 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <g stroke="rgba(255,255,255,.35)" stroke-width="1" fill="none">
@@ -2464,12 +2844,12 @@ en gras. Ton professionnel et courtois.
       <h2 class="trans-title">Se <span class="hl">connecter</span><br>&amp; naviguer</h2>
       <div class="trans-subtitle">« Créer son compte, le sécuriser, et tester son prompt en conditions réelles »</div>
     </div>
-    <img class="logo-cdg" id="logo33" alt="CDG88">
-    <div class="slide-counter">33 / 42</div>
+    <img class="logo-cdg" id="logo38" alt="CDG88">
+    <div class="slide-counter">38 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 34 — CRÉER SON COMPTE ============ -->
-  <section class="slide light" data-slide="34">
+  <!-- ============ SLIDE 39 — CRÉER SON COMPTE ============ -->
+  <section class="slide light" data-slide="39">
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
       <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
@@ -2507,12 +2887,12 @@ en gras. Ton professionnel et courtois.
       </div>
     </div>
     <div class="s32-alt"><strong>Astuce :</strong>&nbsp;si vous avez déjà un compte Google, Gemini est directement accessible. Aucun nouveau compte à créer.</div>
-    <img class="logo-cdg" id="logo34" alt="CDG88">
-    <div class="slide-counter">34 / 42</div>
+    <img class="logo-cdg" id="logo39" alt="CDG88">
+    <div class="slide-counter">39 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 35 — SÉCURISER SON COMPTE ============ -->
-  <section class="slide light" data-slide="35">
+  <!-- ============ SLIDE 40 — SÉCURISER SON COMPTE ============ -->
+  <section class="slide light" data-slide="40">
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
       <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
@@ -2539,12 +2919,12 @@ en gras. Ton professionnel et courtois.
       </div>
     </div>
     <div class="s33-callout">Cette manipulation prend 2 minutes. Elle protège toutes vos futures conversations.</div>
-    <img class="logo-cdg" id="logo35" alt="CDG88">
-    <div class="slide-counter">35 / 42</div>
+    <img class="logo-cdg" id="logo40" alt="CDG88">
+    <div class="slide-counter">40 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 36 — EXERCICE INDIVIDUEL : VOTRE PREMIER PROMPT ============ -->
-  <section class="slide light" data-slide="36">
+  <!-- ============ SLIDE 41 — EXERCICE INDIVIDUEL : VOTRE PREMIER PROMPT ============ -->
+  <section class="slide light" data-slide="41">
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
       <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
@@ -2584,12 +2964,12 @@ en gras. Ton professionnel et courtois.
         </div>
       </div>
     </div>
-    <img class="logo-cdg" id="logo36" alt="CDG88">
-    <div class="slide-counter">36 / 42</div>
+    <img class="logo-cdg" id="logo41" alt="CDG88">
+    <div class="slide-counter">41 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 37 — NAVIGATION GUIDÉE EN DIRECT ============ -->
-  <section class="slide light" data-slide="37">
+  <!-- ============ SLIDE 42 — NAVIGATION GUIDÉE EN DIRECT ============ -->
+  <section class="slide light" data-slide="42">
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
       <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
@@ -2628,12 +3008,12 @@ en gras. Ton professionnel et courtois.
       <div class="s34-comparia"><div><strong>Outil public —</strong>&nbsp;Pour aller plus loin, <strong>compar:IA</strong> (Ministère de la Culture) permet de comparer plusieurs IA en aveugle et de mesurer leur empreinte écologique : <a href="https://comparia.beta.gouv.fr/" target="_blank" rel="noopener">comparia.beta.gouv.fr</a></div></div>
       <div class="s34-fiche">Fiche « Mon premier prompt » distribuée — notez : outil utilisé / prompt / résultat / ce que j'ai changé</div>
     </div>
-    <img class="logo-cdg" id="logo37" alt="CDG88">
-    <div class="slide-counter">37 / 42</div>
+    <img class="logo-cdg" id="logo42" alt="CDG88">
+    <div class="slide-counter">42 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 38 — RÉCAPITULATIF + ENGAGEMENT ============ -->
-  <section class="slide light" data-slide="38">
+  <!-- ============ SLIDE 43 — RÉCAPITULATIF + ENGAGEMENT ============ -->
+  <section class="slide light" data-slide="43">
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
       <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
@@ -2662,12 +3042,12 @@ en gras. Ton professionnel et courtois.
         <div class="s35-postit-note">Les questions restantes alimenteront le début de l'après-midi.</div>
       </div>
     </div>
-    <img class="logo-cdg" id="logo38" alt="CDG88">
-    <div class="slide-counter">38 / 42</div>
+    <img class="logo-cdg" id="logo43" alt="CDG88">
+    <div class="slide-counter">43 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 39 — 🍽️ PAUSE DÉJEUNER (DARK) ============ -->
-  <section class="slide dark" data-slide="39">
+  <!-- ============ SLIDE 44 — 🍽️ PAUSE DÉJEUNER (DARK) ============ -->
+  <section class="slide dark" data-slide="44">
     <div class="deco-dots"></div>
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
@@ -2680,12 +3060,12 @@ en gras. Ton professionnel et courtois.
       <div class="pause-box">Gardez votre fiche « Mon premier prompt » — elle servira cet après-midi.</div>
       <div class="pause-next">Après la pause : Travail en groupes sur vos cas d'usage réels</div>
     </div>
-    <img class="logo-cdg" id="logo39" alt="CDG88">
-    <div class="slide-counter">39 / 42</div>
+    <img class="logo-cdg" id="logo44" alt="CDG88">
+    <div class="slide-counter">44 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 40 — DÉMARRAGE DU QUIZ ============ -->
-  <section class="slide light" data-slide="40">
+  <!-- ============ SLIDE 45 — DÉMARRAGE DU QUIZ ============ -->
+  <section class="slide light" data-slide="45">
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
       <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
@@ -2750,12 +3130,12 @@ en gras. Ton professionnel et courtois.
       </div>
     </div>
 
-    <img class="logo-cdg" id="logo40" alt="CDG88">
-    <div class="slide-counter">40 / 42</div>
+    <img class="logo-cdg" id="logo45" alt="CDG88">
+    <div class="slide-counter">45 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 41 — QUESTION EN COURS ============ -->
-  <section class="slide light" data-slide="41">
+  <!-- ============ SLIDE 46 — QUESTION EN COURS ============ -->
+  <section class="slide light" data-slide="46">
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
       <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
@@ -2806,12 +3186,12 @@ en gras. Ton professionnel et courtois.
       <button class="quiz-next-btn" onclick="quizDemoNext()">Question suivante</button>
     </div>
 
-    <img class="logo-cdg" id="logo41" alt="CDG88">
-    <div class="slide-counter">41 / 42</div>
+    <img class="logo-cdg" id="logo46" alt="CDG88">
+    <div class="slide-counter">46 / 47</div>
   </section>
 
-  <!-- ============ SLIDE 42 — RÉSULTATS / PODIUM ============ -->
-  <section class="slide light" data-slide="42">
+  <!-- ============ SLIDE 47 — RÉSULTATS / PODIUM ============ -->
+  <section class="slide light" data-slide="47">
     <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
       <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
@@ -2860,8 +3240,8 @@ en gras. Ton professionnel et courtois.
       <button class="quiz-replay-btn" onclick="quizDemoReplay()">↻ Recommencer en démo</button>
     </div>
 
-    <img class="logo-cdg" id="logo42" alt="CDG88">
-    <div class="slide-counter">42 / 42</div>
+    <img class="logo-cdg" id="logo47" alt="CDG88">
+    <div class="slide-counter">47 / 47</div>
   </section>
 
 </div>
