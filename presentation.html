@@ -289,7 +289,7 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
 .s10-q{font-size:1.7rem;font-weight:700;color:var(--navy);line-height:1.35;max-width:950px}
 .s10-q em{color:var(--rouge);font-style:normal;font-weight:800}
 .s10-q-sub{font-size:1.4rem;font-weight:600;color:var(--texte-sec);font-style:italic;line-height:1.35;max-width:900px;padding-left:1rem;border-left:4px solid var(--orange)}
-.s10-logos{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:.8rem}
+.s10-logos{display:grid;grid-template-columns:repeat(5,1fr);gap:.9rem;margin-top:.8rem}
 .s10-logo{background:#fff;border-radius:14px;padding:1.4rem 1rem;text-align:center;box-shadow:0 2px 8px rgba(39,42,95,.08);border-top:4px solid var(--navy);display:flex;flex-direction:column;align-items:center;gap:.5rem;transition:transform .2s}
 .s10-logo:nth-child(1){border-top-color:#10A37F}
 .s10-logo:nth-child(2){border-top-color:#4285F4}
@@ -305,8 +305,8 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
 .s10-logo-maker{font-size:.72rem;color:var(--texte-sec);letter-spacing:.05em;text-transform:uppercase;font-weight:600}
 
 /* ===== SLIDE 11 — LES 5 OUTILS (refonte avec logos officiels) ===== */
-.s11-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;flex:1;min-height:0;margin-bottom:1.1rem}
-.s11-card{background:#fff;border-radius:16px;padding:1.4rem 1.1rem 1.1rem;box-shadow:0 2px 8px rgba(39,42,95,.08);display:flex;flex-direction:column;gap:.65rem;border:1px solid rgba(39,42,95,.06);transition:transform .25s, box-shadow .25s, border-color .25s;position:relative;overflow:hidden;text-decoration:none;color:inherit;cursor:pointer}
+.s11-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:.8rem;flex:1;min-height:0;margin-bottom:1.1rem}
+.s11-card{background:#fff;border-radius:16px;padding:1.2rem .9rem .95rem;box-shadow:0 2px 8px rgba(39,42,95,.08);display:flex;flex-direction:column;gap:.55rem;border:1px solid rgba(39,42,95,.06);transition:transform .25s, box-shadow .25s, border-color .25s;position:relative;overflow:hidden;text-decoration:none;color:inherit;cursor:pointer}
 .s11-card::after{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:currentColor}
 .s11-card::before{content:"↗";position:absolute;top:.7rem;right:.9rem;width:24px;height:24px;border-radius:50%;background:var(--fond);color:var(--texte-sec);font-size:.9rem;font-weight:800;display:flex;align-items:center;justify-content:center;transition:all .25s;line-height:1;opacity:.6}
 .s11-card:hover{transform:translateY(-6px);box-shadow:0 14px 30px rgba(39,42,95,.16);border-color:currentColor}
@@ -316,6 +316,7 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
 .s11-card.orange{color:#FA520F}
 .s11-card.cyan{color:#20B8CD}
 .s11-card.navy{color:var(--navy)}
+.s11-card.terracotta{color:#C96442}
 .s11-logo{width:54px;height:54px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:var(--fond);padding:8px;box-shadow:inset 0 0 0 1px rgba(39,42,95,.05)}
 .s11-logo svg{width:100%;height:100%;display:block}
 .s11-name{font-size:1.1rem;font-weight:800;color:var(--navy);letter-spacing:-.01em;line-height:1.1}
@@ -639,6 +640,11 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
 .s34-bonus strong{color:#4285F4;font-weight:700}
 .s34-fiche{font-size:.88rem;color:var(--texte);background:var(--fond);border-radius:10px;padding:.65rem 1.2rem;display:flex;align-items:center;gap:.6rem;font-weight:500}
 .s34-fiche::before{content:"📄";font-size:1.1rem}
+.s34-comparia{background:linear-gradient(135deg,#eef2ff 0%, #f5f3ff 100%);border-left:4px solid #6464f3;border-radius:0 12px 12px 0;padding:.85rem 1.3rem;font-size:.92rem;color:var(--texte);line-height:1.55;display:flex;align-items:center;gap:.8rem}
+.s34-comparia::before{content:"🇫🇷";font-size:1.3rem;flex-shrink:0}
+.s34-comparia strong{color:#6464f3;font-weight:700}
+.s34-comparia a{color:#6464f3;font-weight:600;text-decoration:underline;text-underline-offset:2px}
+.s34-comparia a:hover{color:#4949c4}
 
 /* --- SLIDE 34 : récapitulatif --- */
 .s35-wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:1.4rem;flex:1;min-height:0;margin-top:.5rem}
@@ -1356,7 +1362,7 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
 
     <div class="s10-content">
       <div class="s10-header">
-        <div class="s10-q">« ChatGPT, tout le monde connaît. Mais savez-vous ce qui le différencie de <em>Gemini, Mistral ou Perplexity</em> ? »</div>
+        <div class="s10-q">« ChatGPT, tout le monde connaît. Mais savez-vous ce qui le différencie de <em>Claude, Gemini, Mistral ou Perplexity</em> ? »</div>
         <div class="s10-q-sub">Et lequel serait le plus utile pour votre travail au quotidien ?</div>
       </div>
 
@@ -1370,6 +1376,11 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
           <div class="s10-logo-mark">✦</div>
           <div class="s10-logo-name">Gemini</div>
           <div class="s10-logo-maker">Google · USA</div>
+        </div>
+        <div class="s10-logo">
+          <div class="s10-logo-mark">C</div>
+          <div class="s10-logo-name">Claude</div>
+          <div class="s10-logo-maker">Anthropic · USA</div>
         </div>
         <div class="s10-logo">
           <div class="s10-logo-mark">M</div>
@@ -1395,7 +1406,7 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
       <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
     </div>
 
-    <h2 class="s2-title"><span class="bar"></span>Les 5 outils à connaître</h2>
+    <h2 class="s2-title"><span class="bar"></span>Les 6 outils à connaître</h2>
     <div class="s2-subtitle">Tous gratuits — chacun avec sa spécialité</div>
 
     <div class="s11-grid">
@@ -1442,6 +1453,26 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
         <div class="s11-footer">
           <span class="s11-free">Gratuit</span>
           <span class="s11-link-label">gemini.google →</span>
+        </div>
+      </a>
+
+      <a class="s11-card terracotta" href="https://claude.ai" target="_blank" rel="noopener">
+        <div class="s11-logo">
+          <!-- Logo Claude (sparkle stylisé orange terracotta Anthropic) -->
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Claude">
+            <path fill="#C96442" d="M50 8 L57 35 L84 42 L57 49 L50 76 L43 49 L16 42 L43 35 Z"/>
+            <path fill="#C96442" opacity=".55" d="M78 60 L82 72 L94 76 L82 80 L78 92 L74 80 L62 76 L74 72 Z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="s11-name">Claude</div>
+          <div class="s11-maker">Anthropic · USA</div>
+        </div>
+        <div class="s11-usage">Rédaction longue, analyse de documents complexes. Réputé pour sa qualité d'écriture et sa rigueur.</div>
+        <div class="s11-quote">« Le plus littéraire »</div>
+        <div class="s11-footer">
+          <span class="s11-free">Gratuit</span>
+          <span class="s11-link-label">claude.ai →</span>
         </div>
       </a>
 
@@ -2518,6 +2549,7 @@ en gras. Ton professionnel et courtois.
         </div>
       </div>
       <div class="s34-bonus"><strong>Bonus —</strong>&nbsp;testez le même prompt sur ChatGPT ET Gemini. Comparez les réponses : laquelle est meilleure pour votre usage&nbsp;?</div>
+      <div class="s34-comparia"><div><strong>Outil public —</strong>&nbsp;Pour aller plus loin, <strong>compar:IA</strong> (Ministère de la Culture) permet de comparer plusieurs IA en aveugle et de mesurer leur empreinte écologique : <a href="https://comparia.beta.gouv.fr/" target="_blank" rel="noopener">comparia.beta.gouv.fr</a></div></div>
       <div class="s34-fiche">Fiche « Mon premier prompt » distribuée — notez : outil utilisé / prompt / résultat / ce que j'ai changé</div>
     </div>
     <img class="logo-cdg" id="logo36" alt="CDG88">
@@ -2537,7 +2569,7 @@ en gras. Ton professionnel et courtois.
         <div class="s35-checklist-title">Ce que vous savez désormais</div>
         <div class="s35-check"><span class="s35-check-icon">✅</span> L'IA existe depuis 1945 — ChatGPT a tout changé en 2022</div>
         <div class="s35-check"><span class="s35-check-icon">✅</span> ML → DL → LLM : chaque étape a rendu l'IA plus accessible</div>
-        <div class="s35-check"><span class="s35-check-icon">✅</span> 5 outils à connaître : ChatGPT, Gemini, Le Chat, Perplexity, NotebookLM</div>
+        <div class="s35-check"><span class="s35-check-icon">✅</span> 6 outils à connaître : ChatGPT, Gemini, Claude, Le Chat, Perplexity, NotebookLM</div>
         <div class="s35-check"><span class="s35-check-icon">✅</span> Le framework RCTF pour des prompts efficaces</div>
         <div class="s35-check"><span class="s35-check-icon">✅</span> 3 règles de sécurité : les 3C + le feu tricolore des données</div>
         <div class="s35-check"><span class="s35-check-icon">✅</span> Mon compte est créé, sécurisé, et j'ai testé un prompt</div>
