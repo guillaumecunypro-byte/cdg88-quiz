@@ -3558,6 +3558,9 @@ function next(){ if(current < TOTAL - 1) show(current + 1) }
 function prev(){ if(current > 0) show(current - 1) }
 
 document.addEventListener('keydown', e => {
+  // Ne pas naviguer si le focus est sur un élément interactif (quiz, formulaire)
+  const tag = e.target.tagName;
+  if(['INPUT','TEXTAREA','SELECT','BUTTON','A'].includes(tag)) return;
   if(e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
   else if(e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
   else if(e.key === 'Home') show(0);
