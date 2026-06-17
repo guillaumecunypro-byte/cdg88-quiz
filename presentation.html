@@ -349,12 +349,12 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
 .s12-video-wrap iframe{width:100%;flex:1;min-height:0;border:none;display:block}
 
 /* --- SLIDE 13 : Interaction Image — Qui est l'artiste ? --- */
-.s13int-wrap{flex:1;display:grid;grid-template-columns:1.1fr 1fr;gap:3rem;align-items:center;padding:0 2vw}
+.s13int-wrap{flex:1;display:grid;grid-template-columns:1.1fr 1fr;gap:3rem;align-items:center;align-content:center;padding:0 2vw}
 .s13int-left{display:flex;flex-direction:column;gap:1.4rem;justify-content:center}
 .s13int-eyebrow{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;font-weight:700;color:var(--rouge);display:flex;align-items:center;gap:.6rem}
 .s13int-eyebrow::before{content:"";width:32px;height:2px;background:var(--rouge)}
 .s13int-marks{font-size:4rem;color:var(--texte-sec);line-height:.6;font-family:Georgia,serif;font-weight:900;opacity:.35}
-.s13int-question{font-size:clamp(1.3rem,2.5vw,1.8rem);font-weight:700;font-style:italic;color:var(--navy);line-height:1.45;letter-spacing:-.01em}
+.s13int-question{font-size:clamp(1.7rem,3vw,2.4rem);font-weight:700;font-style:italic;color:var(--navy);line-height:1.45;letter-spacing:-.01em}
 .s13int-question .hl{color:var(--rouge);font-style:normal;font-weight:800}
 .s13int-sub{font-size:1rem;color:var(--texte-sec);font-weight:600;line-height:1.5;padding-left:1rem;border-left:3px solid var(--texte-sec)}
 .s13int-right{display:flex;align-items:center;justify-content:center;position:relative}
@@ -384,11 +384,11 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
 
 /* --- SLIDE 16 : IA dans les films --- */
 .sfilm-layout{display:grid;grid-template-columns:1.1fr 1fr;gap:1.4rem;flex:1;min-height:0;align-items:stretch}
-.sfilm-left{display:flex;flex-direction:column;gap:1rem}
-.sfilm-video-wrap{background:#000;border-radius:14px;overflow:hidden;box-shadow:0 6px 24px rgba(39,42,95,.2);flex:1;display:flex;flex-direction:column}
+.sfilm-left{display:flex;flex-direction:column;gap:1rem;min-height:0}
+.sfilm-video-wrap{background:#000;border-radius:14px;overflow:hidden;box-shadow:0 6px 24px rgba(39,42,95,.2);flex:1;display:flex;flex-direction:column;min-height:0}
 .sfilm-video-label{font-size:.68rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);padding:.55rem 1rem;background:var(--navy);display:flex;align-items:center;gap:.5rem;flex-shrink:0}
 .sfilm-video-label::before{content:"🎬";font-size:.8rem}
-.sfilm-video-wrap iframe{width:100%;flex:1;min-height:220px;border:none;display:block}
+.sfilm-video-wrap iframe{width:100%;flex:1;min-height:320px;border:none;display:block;aspect-ratio:16/9}
 .sfilm-right{background:linear-gradient(135deg,#1a73e8 0%,#1557b0 100%);border-radius:16px;padding:1.6rem 1.5rem;display:flex;flex-direction:column;gap:1rem;color:#fff;box-shadow:0 6px 20px rgba(26,115,232,.3)}
 .sfilm-badge{font-size:.7rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.75);background:rgba(255,255,255,.12);padding:.4rem .9rem;border-radius:14px;width:fit-content}
 .sfilm-title{font-size:1.5rem;font-weight:900;color:#fff;line-height:1.15;letter-spacing:-.01em}
@@ -400,7 +400,7 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
 .sfilm-key strong{color:#ffd700;display:block;margin-bottom:.2rem;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
 
 /* --- SLIDE 17 : Interaction Emploi --- */
-.sempl-wrap{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;padding:0 2vw}
+.sempl-wrap{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;align-content:center;padding:0 2vw}
 .sempl-left{display:flex;flex-direction:column;gap:1.4rem;justify-content:center}
 .sempl-eyebrow{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;font-weight:700;color:var(--rouge);display:flex;align-items:center;gap:.6rem}
 .sempl-eyebrow::before{content:"";width:32px;height:2px;background:var(--rouge)}
