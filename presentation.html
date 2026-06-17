@@ -2074,41 +2074,50 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
 
 
   <!-- ============ SLIDE 18 — IA DANS LES FILMS ============ -->
-  <section class="slide dark" data-slide="18" style="padding:0;overflow:hidden;position:relative">
-    <!-- Affiche plein fond -->
-    <img
-      src="house-of-david-poster (1).avif"
-      alt="House of David — Amazon Prime Video"
-      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;z-index:0">
-    <!-- Dégradé : transparent à gauche → bleu opaque à droite -->
-    <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.08) 0%,rgba(10,30,80,.6) 38%,rgba(21,87,176,.96) 58%,#1557b0 100%);z-index:1"></div>
-
-    <!-- Navigation -->
-    <div class="nav-arrow" style="position:relative;z-index:3">
+  <section class="slide light" data-slide="18">
+    <div class="nav-arrow">
       <button class="nav-btn" onclick="prev()" aria-label="Précédent">‹</button>
       <button class="nav-btn" onclick="next()" aria-label="Suivant">›</button>
     </div>
 
-    <!-- Contenu : panneau droit superposé -->
-    <div style="position:absolute;right:0;top:0;bottom:0;width:44%;padding:2.2rem 2.5rem;display:flex;flex-direction:column;justify-content:center;gap:1.1rem;z-index:2">
-      <div class="sfilm-badge" style="align-self:flex-start">Amazon Prime Video · 2024</div>
-      <div style="font-size:2rem;font-weight:900;color:#fff;letter-spacing:-.02em;line-height:1.1">House of David</div>
-      <div style="font-size:.95rem;color:rgba(255,255,255,.8);font-weight:500">L'IA au cœur des effets visuels</div>
-      <div class="sfilm-sub">
-        « Chaque artiste disposait de ses propres outils IA génératifs (Midjourney, Kling, Runway…) adaptés à l'esthétique de la série »
+    <h2 class="s2-title"><span class="bar"></span>L'IA s'invite au cinéma</h2>
+    <div class="s2-subtitle">3 Français révolutionnent Hollywood avec l'IA générative</div>
+
+    <div class="sfilm-layout">
+      <!-- Gauche : vidéo YouTube House of David -->
+      <div class="sfilm-left">
+        <div class="sfilm-video-wrap">
+          <div class="sfilm-video-label">House of David — VFX générés par IA (Amazon Prime)</div>
+          <iframe
+            src="https://www.youtube.com/embed/72MxUEfac8U?rel=0&modestbranding=1"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            title="House of David — VFX IA">
+          </iframe>
+        </div>
       </div>
-      <div class="sfilm-prime" style="align-self:flex-start">
-        <span class="sfilm-prime-logo">📺</span>
-        <span class="sfilm-prime-text">Amazon Prime Video</span>
-      </div>
-      <div class="sfilm-key">
-        <strong>À retenir</strong>
-        Des professionnels du cinéma remplacent des studios entiers d'effets spéciaux grâce à 3 outils IA. Ce qui coûtait des millions se fait à présent en quelques jours.
+
+      <!-- Droite : carte House of David -->
+      <div class="sfilm-right">
+        <div class="sfilm-badge">Amazon Prime Video · 2024</div>
+        <div class="sfilm-title">House of David</div>
+        <div style="font-size:.92rem;color:rgba(255,255,255,.8);font-weight:500">L'IA au cœur des effets visuels</div>
+        <div class="sfilm-sub">
+          « Chaque artiste disposait de ses propres outils IA génératifs (Midjourney, Kling, Runway…) adaptés à l'esthétique de la série »
+        </div>
+        <div class="sfilm-prime">
+          <span class="sfilm-prime-logo">📺</span>
+          <span class="sfilm-prime-text">Amazon Prime Video</span>
+        </div>
+        <div class="sfilm-key">
+          <strong>À retenir</strong>
+          Des professionnels du cinéma remplacent des studios entiers d'effets spéciaux grâce à 3 outils IA. Ce qui coûtait des millions se fait à présent en quelques jours.
+        </div>
       </div>
     </div>
 
-    <img class="logo-cdg" id="logo18" alt="CDG88" style="filter:brightness(0) invert(1);opacity:.85;z-index:3;position:relative">
-    <div class="slide-counter" style="z-index:3;position:relative">18 / 52</div>
+    <img class="logo-cdg" id="logo18" alt="CDG88">
+    <div class="slide-counter">18 / 52</div>
   </section>
 
 
