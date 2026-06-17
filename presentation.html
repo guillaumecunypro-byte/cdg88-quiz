@@ -47,13 +47,13 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
 }
 
 /* Réseau de nœuds décoratifs (slide transition) */
-.deco-network{position:absolute;top:-20px;right:-20px;width:420px;height:320px;opacity:.45;pointer-events:none}
+.deco-network{position:absolute;top:-20px;right:-20px;width:420px;height:320px;opacity:.45;pointer-events:none;animation:dn-float 18s ease-in-out infinite}
 
 /* === Animations de la constellation === */
 .deco-network circle{transform-box:fill-box;transform-origin:center;animation:dn-pulse 4.2s ease-in-out infinite}
-.deco-network g[fill="#E94059"] circle{animation-name:dn-pulse-rouge}
-.deco-network g[fill="#F7A720"] circle{animation-name:dn-pulse-orange;animation-duration:5s}
-.deco-network g[fill="#fff"] circle{animation-name:dn-pulse-blanc;animation-duration:3.4s}
+.deco-network g[fill="#E94059"] circle{animation-name:dn-drift-rouge}
+.deco-network g[fill="#F7A720"] circle{animation-name:dn-drift-orange;animation-duration:7s}
+.deco-network g[fill="#fff"] circle{animation-name:dn-drift-blanc;animation-duration:5.4s}
 
 /* Délais étalés pour éviter la synchronisation visuelle */
 .deco-network g[fill="#E94059"] circle:nth-child(1){animation-delay:0s}
@@ -72,17 +72,34 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
 .deco-network g[stroke] line:nth-child(3n){animation-duration:5.5s;animation-delay:.5s}
 .deco-network g[stroke] line:nth-child(4n){animation-duration:8s;animation-delay:2s}
 
-@keyframes dn-pulse-rouge{
-  0%,100%{transform:scale(1);opacity:1;filter:drop-shadow(0 0 0 transparent)}
-  50%{transform:scale(1.25);opacity:.85;filter:drop-shadow(0 0 6px rgba(233,64,89,.6))}
+/* Dérive + pulsation combinées : les points flottent et respirent */
+@keyframes dn-drift-rouge{
+  0%{transform:translate(0,0) scale(1);opacity:1;filter:drop-shadow(0 0 0 transparent)}
+  25%{transform:translate(7px,-5px) scale(1.18);opacity:.9;filter:drop-shadow(0 0 6px rgba(233,64,89,.6))}
+  50%{transform:translate(3px,6px) scale(1.25);opacity:.85;filter:drop-shadow(0 0 7px rgba(233,64,89,.6))}
+  75%{transform:translate(-6px,2px) scale(1.12);opacity:.92;filter:drop-shadow(0 0 5px rgba(233,64,89,.5))}
+  100%{transform:translate(0,0) scale(1);opacity:1;filter:drop-shadow(0 0 0 transparent)}
 }
-@keyframes dn-pulse-orange{
-  0%,100%{transform:scale(1);opacity:1;filter:drop-shadow(0 0 0 transparent)}
-  50%{transform:scale(1.3);opacity:.88;filter:drop-shadow(0 0 7px rgba(247,167,32,.7))}
+@keyframes dn-drift-orange{
+  0%{transform:translate(0,0) scale(1);opacity:1;filter:drop-shadow(0 0 0 transparent)}
+  25%{transform:translate(-6px,5px) scale(1.2);opacity:.9;filter:drop-shadow(0 0 6px rgba(247,167,32,.7))}
+  50%{transform:translate(5px,-6px) scale(1.3);opacity:.88;filter:drop-shadow(0 0 8px rgba(247,167,32,.7))}
+  75%{transform:translate(7px,3px) scale(1.15);opacity:.93;filter:drop-shadow(0 0 5px rgba(247,167,32,.6))}
+  100%{transform:translate(0,0) scale(1);opacity:1;filter:drop-shadow(0 0 0 transparent)}
 }
-@keyframes dn-pulse-blanc{
-  0%,100%{transform:scale(1);opacity:.9;filter:drop-shadow(0 0 0 transparent)}
-  50%{transform:scale(1.4);opacity:1;filter:drop-shadow(0 0 5px rgba(255,255,255,.6))}
+@keyframes dn-drift-blanc{
+  0%{transform:translate(0,0) scale(1);opacity:.9;filter:drop-shadow(0 0 0 transparent)}
+  33%{transform:translate(6px,7px) scale(1.3);opacity:1;filter:drop-shadow(0 0 5px rgba(255,255,255,.6))}
+  66%{transform:translate(-7px,-4px) scale(1.4);opacity:1;filter:drop-shadow(0 0 6px rgba(255,255,255,.6))}
+  100%{transform:translate(0,0) scale(1);opacity:.9;filter:drop-shadow(0 0 0 transparent)}
+}
+/* Flottement lent de toute la constellation (lignes + points ensemble) */
+@keyframes dn-float{
+  0%{transform:translate(0,0) rotate(0deg)}
+  25%{transform:translate(-10px,8px) rotate(-1.2deg)}
+  50%{transform:translate(6px,-10px) rotate(1deg)}
+  75%{transform:translate(-6px,-4px) rotate(-.6deg)}
+  100%{transform:translate(0,0) rotate(0deg)}
 }
 @keyframes dn-line{
   0%,100%{opacity:.35}
@@ -91,6 +108,7 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',-apple-syst
 
 /* Respecter la préférence de l'utilisateur pour réduire les animations */
 @media (prefers-reduced-motion:reduce){
+  .deco-network,
   .deco-network circle,
   .deco-network g[stroke] line{animation:none}
 }
