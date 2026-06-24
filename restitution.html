@@ -202,6 +202,21 @@ a{color:inherit}
 .niveau2-p{font-size:.95rem;color:var(--texte-sec);max-width:520px;margin:0 auto}
 @media(prefers-reduced-motion:reduce){.niveau2-icons span{animation:none}}
 
+/* === CHARTE CHECKLIST === */
+.charte-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1rem}
+.charte-item{background:#fff;border:1.5px solid var(--bord);border-radius:14px;padding:1.2rem;border-top:4px solid var(--navy)}
+.charte-num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;background:var(--navy);color:#fff;font-weight:900;font-size:.88rem;margin-bottom:.6rem}
+.charte-h{font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:.35rem;line-height:1.2}
+.charte-t{font-size:.87rem;color:var(--texte)}
+
+/* === PROMPT COPIABLE === */
+.promptcopy{position:relative;margin-top:.4rem}
+.promptcopy pre{background:var(--navy);color:#eef0fa;border-radius:14px;padding:1.5rem 1.3rem;font-family:'Inter',sans-serif;font-size:.9rem;line-height:1.55;white-space:pre-wrap;word-break:break-word}
+.promptcopy pre strong{color:var(--orange);font-weight:800}
+.copy-btn{position:absolute;top:.8rem;right:.8rem;background:var(--orange);color:var(--navy);border:none;border-radius:8px;padding:.5rem .9rem;font-family:inherit;font-weight:800;font-size:.78rem;cursor:pointer;transition:background .15s}
+.copy-btn:hover{background:#ffc05a}
+.copy-btn.done{background:var(--vert);color:#fff}
+
 /* === FOOTER === */
 footer{text-align:center;padding:2.5rem 5vw;font-size:.82rem;color:var(--texte-sec);border-top:1px solid var(--bord);background:#fff}
 footer strong{color:var(--navy)}
@@ -245,6 +260,7 @@ footer strong{color:var(--navy)}
   <button class="tab" data-tab="prompt"><span class="tab-emoji">💬</span>Bien prompter</button>
   <button class="tab" data-tab="pratiques"><span class="tab-emoji">🛡️</span>Bonnes pratiques</button>
   <button class="tab" data-tab="ethique"><span class="tab-emoji">⚖️</span>Éthique &amp; AI Act</button>
+  <button class="tab" data-tab="charte"><span class="tab-emoji">📜</span>Ma charte IA</button>
   <button class="tab" data-tab="suite"><span class="tab-emoji">🚀</span>La suite&nbsp;?</button>
 </nav>
 
@@ -565,9 +581,52 @@ footer strong{color:var(--navy)}
     <div class="callout">Ces questions n'ont pas de réponse tranchée — l'essentiel est de rester <strong>lucide, transparent et responsable</strong> dans chacun de vos usages.</div>
   </section>
 
-  <!-- ============ PANEL 5 — LA SUITE ============ -->
-  <section class="panel" id="suite">
+  <!-- ============ PANEL — MA CHARTE IA ============ -->
+  <section class="panel" id="charte">
     <div class="sec-eyebrow">Partie 5</div>
+    <h2 class="sec-title">Comment créer ma charte IA pour ma collectivité&nbsp;?</h2>
+    <p class="sec-lead">Une <strong>charte d'usage de l'IA</strong> est un document interne qui fixe ce qui est autorisé, ce qui est interdit, qui décide et qui contrôle. Voici les rubriques à n'oublier sous aucun prétexte — d'après les recommandations de la CNIL, de la DINUM et des chartes déjà publiées par les administrations.</p>
+
+    <div class="block-label">Les 16 rubriques d'une charte IA complète</div>
+    <div class="charte-grid">
+      <div class="charte-item"><div class="charte-num">1</div><div class="charte-h">Objectif &amp; périmètre</div><div class="charte-t">Pourquoi cette charte, qui elle concerne (agents, élus, prestataires) et quels outils/usages elle couvre.</div></div>
+      <div class="charte-item"><div class="charte-num">2</div><div class="charte-h">Principes directeurs</div><div class="charte-t">Les valeurs : transparence, supervision humaine, équité &amp; non-discrimination, responsabilité, esprit critique, proportionnalité, sobriété.</div></div>
+      <div class="charte-item"><div class="charte-num">3</div><div class="charte-h">Cas d'usage autorisés</div><div class="charte-t">Ce que les agents peuvent faire : rédaction, résumé, reformulation, traduction, brainstorming, aide à la recherche…</div></div>
+      <div class="charte-item"><div class="charte-num">4</div><div class="charte-h">Cas d'usage interdits ou encadrés</div><div class="charte-t">Décisions automatisées affectant un administré, traitement de données sensibles, usages nécessitant une validation préalable.</div></div>
+      <div class="charte-item"><div class="charte-num">5</div><div class="charte-h">Données &amp; confidentialité</div><div class="charte-t">Ce qui peut/ne peut pas être saisi (feu tricolore), respect du RGPD, anonymisation, désactivation de l'entraînement.</div></div>
+      <div class="charte-item"><div class="charte-num">6</div><div class="charte-h">Supervision &amp; validation humaine</div><div class="charte-t">Relecture humaine systématique : l'agent reste responsable de la décision et du contenu finaux.</div></div>
+      <div class="charte-item"><div class="charte-num">7</div><div class="charte-h">Transparence envers les administrés</div><div class="charte-t">Signaler quand un contenu ou un service est assisté/généré par l'IA.</div></div>
+      <div class="charte-item"><div class="charte-num">8</div><div class="charte-h">Conformité légale</div><div class="charte-t">RGPD, AI Act européen, secret professionnel, droits d'auteur et propriété intellectuelle.</div></div>
+      <div class="charte-item"><div class="charte-num">9</div><div class="charte-h">Gouvernance &amp; responsabilités</div><div class="charte-t">Qui décide, qui contrôle, désignation d'un référent IA, déclaration des projets à une instance.</div></div>
+      <div class="charte-item"><div class="charte-num">10</div><div class="charte-h">Outils autorisés</div><div class="charte-t">La liste des solutions validées par la collectivité — et l'interdiction des comptes personnels pour des données pro.</div></div>
+      <div class="charte-item"><div class="charte-num">11</div><div class="charte-h">Sécurité des comptes &amp; accès</div><div class="charte-t">Mots de passe robustes, double authentification, paramétrage de confidentialité des outils.</div></div>
+      <div class="charte-item"><div class="charte-num">12</div><div class="charte-h">Vérification &amp; esprit critique</div><div class="charte-t">Toujours vérifier les faits, chiffres et références — l'IA peut « halluciner » avec assurance.</div></div>
+      <div class="charte-item"><div class="charte-num">13</div><div class="charte-h">Sobriété numérique</div><div class="charte-t">Un usage raisonné et mesuré, conscient de l'impact environnemental de l'IA.</div></div>
+      <div class="charte-item"><div class="charte-num">14</div><div class="charte-h">Formation &amp; acculturation</div><div class="charte-t">Accompagner les agents : comprendre le fonctionnement, les limites et les biais de l'IA.</div></div>
+      <div class="charte-item"><div class="charte-num">15</div><div class="charte-h">Suivi, révision &amp; mise à jour</div><div class="charte-t">Date, version, instance de suivi et révision régulière face à l'évolution rapide des outils.</div></div>
+      <div class="charte-item"><div class="charte-num">16</div><div class="charte-h">Engagement &amp; signature</div><div class="charte-t">Adhésion formelle : la charte est lue, comprise et signée par chaque agent concerné.</div></div>
+    </div>
+
+    <div class="callout">📚 <strong>Pour vous inspirer :</strong> le <a href="https://alliance.numerique.gouv.fr/cartographie/portail-des-chartes-ia-dans-ladministration/" target="_blank" rel="noopener" style="color:#92400e;font-weight:700">Portail des chartes IA de l'administration</a> (DINUM) recense les chartes déjà publiées, et la <a href="https://www.cnil.fr" target="_blank" rel="noopener" style="color:#92400e;font-weight:700">CNIL</a> fournit ses recommandations sur l'IA dans les services publics.</div>
+
+    <div class="block-label">Le prompt prêt à l'emploi — laissez l'IA vous assister</div>
+    <p style="font-size:.95rem;color:var(--texte-sec);margin-bottom:1rem;max-width:760px">Copiez-collez ce prompt dans l'outil de votre choix (ChatGPT, Claude, Le Chat…). L'IA vous interrogera étape par étape, puis rédigera une charte complète et personnalisée pour votre commune.</p>
+    <div class="promptcopy">
+      <button class="copy-btn" onclick="copyPrompt(this)">📋 Copier</button>
+      <pre id="charte-prompt"><strong>RÔLE :</strong> Tu es un expert en gouvernance de l'intelligence artificielle dans le secteur public français, spécialisé dans l'accompagnement des collectivités territoriales. Tu maîtrises le RGPD, l'AI Act européen et les recommandations de la CNIL et de la DINUM.
+
+<strong>CONTEXTE :</strong> Je suis secrétaire de mairie d'une commune française. Je souhaite rédiger la « charte d'usage de l'intelligence artificielle » de ma collectivité : un document interne qui fixe ce qui est autorisé, ce qui est interdit, qui décide et qui contrôle l'usage de l'IA par les agents.
+
+<strong>TÂCHE :</strong> Avant de rédiger, pose-moi UNE question à la fois pour recueillir ce dont tu as besoin (taille de la commune, outils déjà utilisés, types de tâches concernées, données manipulées, maturité des agents, instance de gouvernance…). Quand tu as assez d'éléments, rédige une charte complète et personnalisée, sans oublier AUCUNE de ces rubriques : objectif et périmètre ; principes directeurs (transparence, supervision humaine, équité, responsabilité, esprit critique, sobriété) ; cas d'usage autorisés ; cas d'usage interdits ou à valider ; données et confidentialité (RGPD) ; relecture humaine obligatoire ; transparence envers les administrés ; conformité (RGPD, AI Act, secret professionnel, droits d'auteur) ; gouvernance et référent IA ; liste des outils autorisés ; sécurité des comptes ; vérification des contenus (hallucinations) ; sobriété numérique ; formation des agents ; suivi et mise à jour ; engagement et signature.
+
+<strong>FORMAT :</strong> Document structuré — titre, sections numérotées, sous-titres clairs. Ton institutionnel mais accessible, prêt à être présenté en conseil municipal et signé par les agents. Commence dès maintenant par ta première question.</pre>
+    </div>
+    <div class="callout">💡 C'est l'application directe du <strong>framework RCTF</strong> et du <strong>« prompt ingénieur »</strong> : l'IA construit le document <em>avec</em> vous, en vous posant les bonnes questions. À vous de relire, valider et adapter avant adoption.</div>
+  </section>
+
+  <!-- ============ PANEL — LA SUITE ============ -->
+  <section class="panel" id="suite">
+    <div class="sec-eyebrow">Partie 6</div>
     <h2 class="sec-title">La suite&nbsp;?</h2>
     <p class="sec-lead">L'État construit ses propres outils d'IA pour le service public — souverains, sécurisés et pensés pour les agents. Voici où suivre ce qui se prépare.</p>
 
@@ -616,6 +675,16 @@ footer strong{color:var(--navy)}
   // Ouvrir sur l'onglet de l'ancre si présente
   const start = location.hash.replace('#','');
   if(start && document.getElementById(start)) activate(start);
+
+  // Copier le prompt de charte (texte brut, sans le balisage)
+  function copyPrompt(btn){
+    const txt = document.getElementById('charte-prompt').innerText;
+    navigator.clipboard.writeText(txt).then(() => {
+      btn.textContent = '✓ Copié';
+      btn.classList.add('done');
+      setTimeout(() => { btn.textContent = '📋 Copier'; btn.classList.remove('done'); }, 2000);
+    });
+  }
 </script>
 
 </body>
