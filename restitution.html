@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restitution — Formation IA Générative · CDG88</title>
+<meta name="description" content="Mémo de restitution de la formation IA Générative pour les Secrétaires de Mairie du CDG88 : outils, techniques de prompt, bonnes pratiques et AI Act.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#272A5F;
+  --rouge:#E94059;
+  --orange:#F7A720;
+  --fond:#F4F5FB;
+  --texte:#1A1D3D;
+  --texte-sec:#6B6E8F;
+  --blanc:#FFFFFF;
+  --vert:#2ECC71;
+  --bord:#e8e8f0;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--fond);color:var(--texte);-webkit-font-smoothing:antialiased;line-height:1.55}
+a{color:inherit}
+
+/* === HERO === */
+.hero{
+  background:linear-gradient(135deg,var(--navy) 0%,#3a3f7a 100%);
+  color:#fff;padding:3.5rem 5vw 3rem;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,.06) 1px,transparent 0);
+  background-size:28px 28px;pointer-events:none;
+}
+.hero-label{font-size:.78rem;font-weight:700;letter-spacing:.28em;color:var(--orange);text-transform:uppercase;margin-bottom:.9rem}
+.hero-title{font-size:clamp(2rem,5.5vw,4rem);font-weight:900;letter-spacing:-.02em;line-height:.98;text-transform:uppercase;margin-bottom:.7rem}
+.hero-title .accent{color:var(--orange)}
+.hero-sub{font-size:1.05rem;font-weight:500;color:rgba(255,255,255,.82);max-width:680px;line-height:1.55;margin-bottom:.4rem}
+.hero-meta{font-size:.82rem;color:rgba(255,255,255,.5);letter-spacing:.1em;text-transform:uppercase;font-weight:600;margin-top:.6rem}
+.hero-back{display:inline-flex;align-items:center;gap:.4rem;font-size:.82rem;font-weight:700;color:rgba(255,255,255,.7);text-decoration:none;margin-bottom:1.4rem;letter-spacing:.04em}
+.hero-back:hover{color:#fff}
+
+/* === TABS === */
+.tabbar{
+  position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--bord);
+  display:flex;gap:.25rem;padding:0 5vw;overflow-x:auto;box-shadow:0 2px 12px rgba(39,42,95,.05);
+}
+.tab{
+  flex:0 0 auto;border:none;background:none;cursor:pointer;font-family:inherit;
+  font-size:.92rem;font-weight:700;color:var(--texte-sec);padding:1.1rem .9rem;
+  border-bottom:3px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap;
+  display:flex;align-items:center;gap:.5rem;
+}
+.tab:hover{color:var(--navy)}
+.tab.active{color:var(--navy);border-bottom-color:var(--rouge)}
+.tab-emoji{font-size:1.1rem}
+
+/* === PANELS === */
+.wrap{max-width:1100px;margin:0 auto;padding:2.5rem 5vw 4rem}
+.panel{display:none;animation:fade .35s ease}
+.panel.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.sec-eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--rouge);margin-bottom:.5rem}
+.sec-title{font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:900;color:var(--navy);letter-spacing:-.02em;line-height:1.1;margin-bottom:.6rem}
+.sec-lead{font-size:1.02rem;color:var(--texte-sec);max-width:760px;margin-bottom:2rem}
+.block-label{font-size:.78rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);margin:2.4rem 0 1rem;display:flex;align-items:center;gap:.6rem}
+.block-label::before{content:"";width:26px;height:3px;background:var(--orange);border-radius:2px}
+
+/* === TOOL CARDS === */
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.1rem}
+.tool{
+  background:#fff;border:1.5px solid var(--bord);border-radius:16px;padding:1.4rem;
+  display:flex;flex-direction:column;gap:.7rem;text-decoration:none;color:inherit;
+  transition:transform .18s,box-shadow .18s,border-color .18s;
+}
+.tool:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(39,42,95,.12);border-color:var(--navy)}
+.tool-top{display:flex;align-items:center;gap:.8rem}
+.tool-badge{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;color:#fff;font-weight:900}
+.tool-name{font-size:1.15rem;font-weight:800;color:var(--navy);line-height:1.1}
+.tool-maker{font-size:.74rem;font-weight:600;color:var(--texte-sec);letter-spacing:.02em}
+.tool-desc{font-size:.9rem;color:var(--texte);flex:1}
+.tool-foot{display:flex;align-items:center;justify-content:space-between;margin-top:.2rem}
+.tool-link{font-size:.82rem;font-weight:700;color:var(--rouge)}
+.pill{font-size:.66rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:.25rem .6rem;border-radius:20px}
+.pill.gen{background:rgba(39,42,95,.09);color:var(--navy)}
+.pill.spe{background:rgba(247,167,32,.16);color:#92400e}
+.pill.free{background:rgba(46,204,113,.14);color:#166534}
+
+/* badges colors */
+.bg-green{background:#10A37F}.bg-terracotta{background:#C96442}.bg-blue{background:linear-gradient(135deg,#1C7DFF,#9168C0)}
+.bg-cyan{background:#20B8CD}.bg-navy{background:var(--navy)}.bg-rouge{background:var(--rouge)}
+
+/* === WHY / distinction === */
+.why{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;margin-top:.4rem}
+.why-card{border-radius:16px;padding:1.5rem;border:1.5px solid var(--bord);background:#fff}
+.why-card.g{border-left:5px solid var(--navy)}
+.why-card.s{border-left:5px solid var(--orange)}
+.why-h{font-size:1.05rem;font-weight:800;color:var(--navy);margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
+.why-card.s .why-h{color:#92400e}
+.why-card p{font-size:.92rem;color:var(--texte);margin-bottom:.5rem}
+.why-card ul{list-style:none;font-size:.88rem;color:var(--texte-sec)}
+.why-card li{padding:.2rem 0 .2rem 1.3rem;position:relative}
+.why-card li::before{content:"›";position:absolute;left:0;color:var(--rouge);font-weight:900}
+
+/* === RCTF === */
+.rctf{display:flex;flex-direction:column;gap:.7rem}
+.rctf-row{display:grid;grid-template-columns:64px 1fr;gap:1rem;background:#fff;border:1.5px solid var(--bord);border-radius:14px;padding:1rem 1.2rem;align-items:center}
+.rctf-letter{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:900;color:#fff}
+.l-r{background:var(--rouge)}.l-c{background:var(--orange)}.l-t{background:var(--navy)}.l-f{background:var(--vert)}
+.rctf-def{font-size:.98rem;font-weight:700;color:var(--navy)}
+.rctf-ex{font-size:.88rem;color:var(--texte-sec);font-style:italic;margin-top:.2rem}
+.callout{background:#fff;border:1.5px dashed var(--orange);border-radius:14px;padding:1.1rem 1.3rem;font-size:.95rem;color:var(--texte);margin-top:1.4rem}
+.callout strong{color:#92400e}
+
+/* prompt example */
+.prompt-box{display:grid;grid-template-columns:1fr;gap:0;border-radius:16px;overflow:hidden;border:1.5px solid var(--bord);margin-top:.4rem}
+.pb-block{padding:1.1rem 1.3rem;font-size:.92rem;border-left:6px solid}
+.pb-block strong{font-weight:800}
+.pb-r{background:rgba(233,64,89,.07);border-color:var(--rouge)}
+.pb-c{background:rgba(247,167,32,.09);border-color:var(--orange)}
+.pb-t{background:rgba(39,42,95,.06);border-color:var(--navy)}
+.pb-f{background:rgba(46,204,113,.08);border-color:var(--vert)}
+.pb-tag{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.35rem;color:var(--navy)}
+
+/* engineer prompt */
+.eng{background:linear-gradient(135deg,var(--navy),#3a3f7a);color:#fff;border-radius:18px;padding:1.8rem;margin-top:.4rem;position:relative;overflow:hidden}
+.eng::before{content:"🛠️";position:absolute;right:1.2rem;top:.8rem;font-size:3.5rem;opacity:.15}
+.eng-h{font-size:1.15rem;font-weight:800;margin-bottom:.5rem}
+.eng p{font-size:.95rem;color:rgba(255,255,255,.88);margin-bottom:1rem;max-width:680px}
+.eng-quote{background:rgba(255,255,255,.1);border-left:4px solid var(--orange);border-radius:10px;padding:1rem 1.2rem;font-size:.92rem;font-style:italic;color:#fff}
+.eng-steps{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.1rem}
+.eng-step{background:rgba(255,255,255,.12);border-radius:10px;padding:.6rem .9rem;font-size:.84rem;font-weight:600;flex:1 1 200px}
+.eng-step b{color:var(--orange);display:block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.2rem}
+
+/* === PRACTICES === */
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.1rem}
+.risk{background:#fff;border:1.5px solid var(--bord);border-radius:16px;padding:1.4rem}
+.risk-rule{font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--rouge);margin-bottom:.6rem}
+.risk-icon{font-size:2rem;margin-bottom:.5rem}
+.risk-title{font-size:1.05rem;font-weight:800;color:var(--navy);margin-bottom:.4rem}
+.risk-text{font-size:.9rem;color:var(--texte)}
+
+.traffic{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.tcol{border-radius:14px;padding:1.2rem;border:1.5px solid}
+.tcol.green{background:rgba(46,204,113,.07);border-color:rgba(46,204,113,.4)}
+.tcol.yellow{background:rgba(247,167,32,.08);border-color:rgba(247,167,32,.45)}
+.tcol.red{background:rgba(233,64,89,.06);border-color:rgba(233,64,89,.4)}
+.tcol-h{font-size:1rem;font-weight:800;margin:.4rem 0 .7rem;color:var(--navy)}
+.tcol ul{list-style:none;font-size:.88rem;color:var(--texte)}
+.tcol li{padding:.28rem 0 .28rem 1.2rem;position:relative}
+.tcol li::before{content:"•";position:absolute;left:.2rem;color:var(--texte-sec)}
+
+.threeC{display:flex;flex-direction:column;gap:.7rem}
+.c-row{display:grid;grid-template-columns:56px 1fr;gap:1rem;background:#fff;border:1.5px solid var(--bord);border-radius:14px;padding:1.1rem 1.2rem;align-items:center}
+.c-badge{width:48px;height:48px;border-radius:50%;background:var(--rouge);color:#fff;font-size:1.5rem;font-weight:900;display:flex;align-items:center;justify-content:center}
+.c-title{font-size:1.02rem;font-weight:800;color:var(--navy)}
+.c-text{font-size:.9rem;color:var(--texte);margin-top:.15rem}
+.intern{background:#fff;border:1.5px solid var(--bord);border-left:5px solid var(--navy);border-radius:14px;padding:1.3rem;margin-top:.4rem;font-size:.98rem}
+.intern b{color:var(--navy)}
+
+/* === ETHIQUE / AI ACT === */
+.aia-banner{background:linear-gradient(135deg,var(--navy),#3a3f7a);color:#fff;border-radius:16px;padding:1.6rem;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.aia-banner-txt{font-size:.98rem;max-width:680px}
+.aia-banner-txt .vig{display:inline-block;margin-top:.6rem;font-size:.8rem;background:rgba(255,255,255,.14);padding:.3rem .7rem;border-radius:8px}
+.aia-shield{font-size:3rem}
+.bans{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.ban{background:#fff;border:1.5px solid var(--bord);border-radius:14px;padding:1.1rem;font-size:.9rem}
+.ban-i{font-size:1.6rem;margin-bottom:.4rem}
+.sanction{background:rgba(233,64,89,.07);border:1.5px solid rgba(233,64,89,.35);border-radius:14px;padding:1.2rem;font-size:.95rem;margin-top:1rem}
+.sanction .lab{display:block;font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--rouge);margin-bottom:.3rem}
+.impact{background:#fff;border:1.5px solid var(--bord);border-left:5px solid var(--orange);border-radius:14px;padding:1.3rem;margin-top:1.4rem;display:flex;gap:1rem;align-items:flex-start}
+.impact-i{font-size:2rem}
+.impact-l{font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#92400e;margin-bottom:.3rem}
+.debat{background:#fff;border:1.5px dashed var(--navy);border-radius:14px;padding:1.3rem;margin-top:1.4rem}
+.debat-q{font-size:1rem;font-weight:700;color:var(--navy);font-style:italic}
+.debat-q + .debat-q{margin-top:.6rem}
+
+/* === FOOTER === */
+footer{text-align:center;padding:2.5rem 5vw;font-size:.82rem;color:var(--texte-sec);border-top:1px solid var(--bord);background:#fff}
+footer strong{color:var(--navy)}
+
+@media(max-width:640px){
+  .why{grid-template-columns:1fr}
+  .hero{padding:2.6rem 1.5rem 2.2rem}
+  .wrap{padding:2rem 1.5rem 3rem}
+  .tabbar{padding:0 1rem}
+  .tab{padding:1rem .6rem;font-size:.84rem}
+  .tab-emoji{font-size:1rem}
+}
+
+@media print{
+  .tabbar{display:none}
+  .panel{display:block !important;page-break-before:always;margin-bottom:2rem}
+  .panel:first-of-type{page-break-before:avoid}
+  .hero{background:var(--navy)}
+  .tool:hover{transform:none}
+  body{background:#fff}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <a class="hero-back" href="index.html">← Retour à l'accueil</a>
+  <div class="hero-label">Centre de Gestion des Vosges — CDG88</div>
+  <h1 class="hero-title">Mémo de <span class="accent">restitution</span></h1>
+  <p class="hero-sub">Tout ce qu'il faut retenir de la journée : les outils, comment bien leur parler, les bonnes pratiques et le cadre légal. À garder sous la main.</p>
+  <div class="hero-meta">Formation IA Générative · Secrétaire de Mairie · 2026</div>
+</header>
+
+<!-- TABS -->
+<nav class="tabbar" id="tabbar">
+  <button class="tab active" data-tab="outils"><span class="tab-emoji">🧰</span>Les outils</button>
+  <button class="tab" data-tab="prompt"><span class="tab-emoji">💬</span>Bien prompter</button>
+  <button class="tab" data-tab="pratiques"><span class="tab-emoji">🛡️</span>Bonnes pratiques</button>
+  <button class="tab" data-tab="ethique"><span class="tab-emoji">⚖️</span>Éthique &amp; AI Act</button>
+</nav>
+
+<div class="wrap">
+
+  <!-- ============ PANEL 1 — OUTILS ============ -->
+  <section class="panel active" id="outils">
+    <div class="sec-eyebrow">Partie 1</div>
+    <h2 class="sec-title">Les outils à connaître</h2>
+    <p class="sec-lead">Tous gratuits, chacun avec sa spécialité. <strong>Savoir en utiliser un, c'est savoir utiliser tous les autres</strong> — la différence tient à leur entraînement et à leur fonction.</p>
+
+    <div class="block-label">Outils généralistes — le « couteau suisse »</div>
+    <div class="tools-grid">
+
+      <a class="tool" href="https://chatgpt.com" target="_blank" rel="noopener">
+        <div class="tool-top">
+          <div class="tool-badge bg-green">✦</div>
+          <div><div class="tool-name">ChatGPT</div><div class="tool-maker">OpenAI · USA</div></div>
+        </div>
+        <div class="tool-desc">Rédaction, courriers, résumés, brainstorming. Le plus connu, interface intuitive.</div>
+        <div class="tool-foot"><span class="tool-link">chatgpt.com →</span><span class="pill gen">Généraliste</span></div>
+      </a>
+
+      <a class="tool" href="https://claude.ai" target="_blank" rel="noopener">
+        <div class="tool-top">
+          <div class="tool-badge bg-terracotta">✶</div>
+          <div><div class="tool-name">Claude</div><div class="tool-maker">Anthropic · USA</div></div>
+        </div>
+        <div class="tool-desc">Rédaction longue et analyse de documents complexes. Réputé pour sa qualité d'écriture et sa rigueur.</div>
+        <div class="tool-foot"><span class="tool-link">claude.ai →</span><span class="pill gen">Généraliste</span></div>
+      </a>
+
+      <a class="tool" href="https://gemini.google.com" target="_blank" rel="noopener">
+        <div class="tool-top">
+          <div class="tool-badge bg-blue">✦</div>
+          <div><div class="tool-name">Gemini</div><div class="tool-maker">Google · USA</div></div>
+        </div>
+        <div class="tool-desc">Rédaction + intégration native à Gmail, Docs et Drive. Déjà connecté à vos outils Google.</div>
+        <div class="tool-foot"><span class="tool-link">gemini.google.com →</span><span class="pill gen">Généraliste</span></div>
+      </a>
+
+    </div>
+
+    <div class="block-label">Outils spécialisés — une mission précise</div>
+    <div class="tools-grid">
+
+      <a class="tool" href="https://www.perplexity.ai" target="_blank" rel="noopener">
+        <div class="tool-top">
+          <div class="tool-badge bg-cyan">◎</div>
+          <div><div class="tool-name">Perplexity</div><div class="tool-maker">Perplexity · USA</div></div>
+        </div>
+        <div class="tool-desc">Recherche en ligne avec <strong>sources cliquables</strong>. Idéal pour la veille réglementaire et juridique.</div>
+        <div class="tool-foot"><span class="tool-link">perplexity.ai →</span><span class="pill spe">Recherche</span></div>
+      </a>
+
+      <a class="tool" href="https://notebooklm.google.com" target="_blank" rel="noopener">
+        <div class="tool-top">
+          <div class="tool-badge bg-navy">📓</div>
+          <div><div class="tool-name">NotebookLM</div><div class="tool-maker">Google · USA</div></div>
+        </div>
+        <div class="tool-desc">Analyser et interroger <strong>vos propres documents</strong> (PDF). L'IA répond uniquement à partir de vos fichiers.</div>
+        <div class="tool-foot"><span class="tool-link">notebooklm.google.com →</span><span class="pill spe">Vos documents</span></div>
+      </a>
+
+      <a class="tool" href="https://suno.com" target="_blank" rel="noopener">
+        <div class="tool-top">
+          <div class="tool-badge bg-rouge">🎵</div>
+          <div><div class="tool-name">Suno</div><div class="tool-maker">Suno · USA</div></div>
+        </div>
+        <div class="tool-desc">Générer une <strong>chanson complète</strong> (paroles + musique) à partir d'une simple description texte.</div>
+        <div class="tool-foot"><span class="tool-link">suno.com →</span><span class="pill spe">Musique</span></div>
+      </a>
+
+    </div>
+
+    <div class="block-label">Généraliste ou spécialisé — pourquoi cette différence ?</div>
+    <div class="why">
+      <div class="why-card g">
+        <div class="why-h">🧰 Généraliste</div>
+        <p>Entraîné sur une immense variété de contenus, il sait tout faire « assez bien » : écrire, résumer, expliquer, traduire, brainstormer.</p>
+        <ul>
+          <li>Polyvalent — un seul outil pour la plupart des tâches texte</li>
+          <li>Le bon réflexe par défaut au quotidien</li>
+          <li>Exemples : ChatGPT, Claude, Gemini</li>
+        </ul>
+      </div>
+      <div class="why-card s">
+        <div class="why-h">🎯 Spécialisé</div>
+        <p>Conçu et entraîné pour <strong>une mission unique</strong>, qu'il accomplit mieux qu'un généraliste : chercher avec preuves, fouiller vos dossiers, composer de la musique.</p>
+        <ul>
+          <li>Plus performant et fiable sur son domaine</li>
+          <li>À sortir quand la tâche est précise</li>
+          <li>Exemples : Perplexity, NotebookLM, Suno</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout"><strong>À retenir :</strong> commencez par un généraliste. Passez au spécialisé dès que le besoin est ciblé — une source à vérifier (Perplexity), un dossier PDF à interroger (NotebookLM), une musique à créer (Suno).</div>
+  </section>
+
+  <!-- ============ PANEL 2 — PROMPT ============ -->
+  <section class="panel" id="prompt">
+    <div class="sec-eyebrow">Partie 2</div>
+    <h2 class="sec-title">Bien parler à l'IA</h2>
+    <p class="sec-lead">L'IA, c'est <strong>un stagiaire avec 150 de QI</strong> : très capable, mais il ne devine pas votre contexte. Plus vos instructions sont claires, meilleur est le résultat. Il fait le brouillon — vous validez.</p>
+
+    <div class="block-label">Le framework RCTF — 4 éléments par ordre d'importance</div>
+    <div class="rctf">
+      <div class="rctf-row">
+        <div class="rctf-letter l-r">R</div>
+        <div><div class="rctf-def">Rôle — qui est l'IA dans cette conversation ?</div><div class="rctf-ex">« Tu es secrétaire de mairie expérimentée… »</div></div>
+      </div>
+      <div class="rctf-row">
+        <div class="rctf-letter l-c">C</div>
+        <div><div class="rctf-def">Contexte — quelle est la situation ?</div><div class="rctf-ex">« …dans une commune de 400 habitants dans les Vosges »</div></div>
+      </div>
+      <div class="rctf-row">
+        <div class="rctf-letter l-t">T</div>
+        <div><div class="rctf-def">Tâche — que dois-tu faire exactement ?</div><div class="rctf-ex">« Rédige un courrier de réponse à M. Dupont qui demande… »</div></div>
+      </div>
+      <div class="rctf-row">
+        <div class="rctf-letter l-f">F</div>
+        <div><div class="rctf-def">Format — comment présenter la réponse ?</div><div class="rctf-ex">« 1 page max, ton officiel mais accessible, paragraphes courts »</div></div>
+      </div>
+    </div>
+    <div class="callout">Vous n'avez pas besoin des 4 éléments à chaque fois — mais <strong>plus vous en donnez, meilleur sera le résultat</strong>.</div>
+
+    <div class="block-label">Un exemple complet, décodé par couleurs</div>
+    <div class="prompt-box">
+      <div class="pb-block pb-r"><span class="pb-tag">Rôle</span>Tu es secrétaire de mairie expérimentée, habituée à rédiger des documents administratifs clairs et conformes aux attentes d'une mairie.</div>
+      <div class="pb-block pb-c"><span class="pb-tag">Contexte</span>La mairie d'Uxegney organise une manifestation pour le 14 juillet. Route principale et rue Roland Davide bloquées de 08h00 à 20h00. Circulation uniquement pour les habitants de 08h00 à 12h00, interdite ensuite.</div>
+      <div class="pb-block pb-t"><span class="pb-tag">Tâche</span>Rédige une note complète d'information aux habitants sur la fermeture des routes, en intégrant : la raison, les horaires précis, les rues concernées, les consignes habitants et visiteurs, une formule de remerciement.</div>
+      <div class="pb-block pb-f"><span class="pb-tag">Format</span>Titre clair et officiel. Paragraphes courts. Horaires et rues en gras. Ton professionnel et courtois. 1 page max prête à imprimer.</div>
+    </div>
+    <div class="callout">🤔 <strong>Toujours débriefer la réponse :</strong> « Est-elle prête à être envoyée ? Qu'est-ce que je changerais avant de la diffuser ? » L'IA produit un brouillon à améliorer — jamais une réponse définitive.</div>
+
+    <div class="block-label">Astuce avancée — le « prompt ingénieur »</div>
+    <div class="eng">
+      <div class="eng-h">Faire écrire le prompt… par l'IA elle-même</div>
+      <p>Vous ne savez pas comment formuler votre demande ? Demandez à l'IA de construire le prompt <em>avec</em> vous. Elle connaît les bonnes pratiques mieux que personne — autant les lui faire appliquer.</p>
+      <div class="eng-quote">« Tu es un expert du prompt. Je veux obtenir [mon objectif]. Pose-moi les questions nécessaires, une par une, puis rédige pour moi le meilleur prompt RCTF possible que je pourrai te renvoyer. »</div>
+      <div class="eng-steps">
+        <div class="eng-step"><b>1 · Vous décrivez</b>votre objectif, même vaguement</div>
+        <div class="eng-step"><b>2 · L'IA questionne</b>pour combler les zones floues</div>
+        <div class="eng-step"><b>3 · L'IA rédige</b>un prompt RCTF complet</div>
+        <div class="eng-step"><b>4 · Vous l'utilisez</b>et l'ajustez à volonté</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PANEL 3 — PRATIQUES ============ -->
+  <section class="panel" id="pratiques">
+    <div class="sec-eyebrow">Partie 3</div>
+    <h2 class="sec-title">Les bonnes pratiques</h2>
+    <p class="sec-lead">L'IA est puissante, mais elle peut vous piéger. Trois règles, un feu tricolore et un réflexe en 3 mots pour l'utiliser sereinement au quotidien.</p>
+
+    <div class="block-label">Les 3 risques à connaître</div>
+    <div class="cards3">
+      <div class="risk">
+        <div class="risk-rule">Règle n°1</div>
+        <div class="risk-icon">🔒</div>
+        <div class="risk-title">Données confidentielles</div>
+        <div class="risk-text">Ne copiez jamais l'état civil d'un administré dans l'IA. Décrivez la situation <strong>sans les données personnelles</strong>.</div>
+      </div>
+      <div class="risk">
+        <div class="risk-rule">Règle n°2</div>
+        <div class="risk-icon">⚙️</div>
+        <div class="risk-title">Désactiver l'entraînement</div>
+        <div class="risk-text">Par défaut, vos conversations peuvent servir à entraîner l'outil. Désactivez cette option dans les réglages de confidentialité.</div>
+      </div>
+      <div class="risk">
+        <div class="risk-rule">Règle n°3</div>
+        <div class="risk-icon">🤔</div>
+        <div class="risk-title">Les hallucinations</div>
+        <div class="risk-text">L'IA ne dit jamais « je ne sais pas » — elle invente plutôt, avec assurance. <strong>Vérifiez toujours avant d'utiliser.</strong></div>
+      </div>
+    </div>
+
+    <div class="block-label">Le feu tricolore des données</div>
+    <div class="traffic">
+      <div class="tcol green">
+        <div style="font-size:1.6rem">🟢</div>
+        <div class="tcol-h">Vous pouvez</div>
+        <ul>
+          <li>Un texte de loi ou règlement générique</li>
+          <li>Une situation décrite sans nom ni adresse</li>
+          <li>Vos questions générales sur un sujet</li>
+          <li>Vos brouillons (sans données personnelles)</li>
+        </ul>
+      </div>
+      <div class="tcol yellow">
+        <div style="font-size:1.6rem">🟡</div>
+        <div class="tcol-h">Avec précaution</div>
+        <ul>
+          <li>Des informations sur votre commune</li>
+          <li>Des courriers avec noms modifiés (M. X, Mme Y)</li>
+          <li>Des extraits de procédures internes</li>
+        </ul>
+      </div>
+      <div class="tcol red">
+        <div style="font-size:1.6rem">🔴</div>
+        <div class="tcol-h">Jamais dans l'IA</div>
+        <ul>
+          <li>Noms + coordonnées d'administrés</li>
+          <li>Données sensibles (santé, famille, revenus)</li>
+          <li>Documents confidentiels ou classifiés</li>
+          <li>Codes d'accès, mots de passe, n° de dossiers</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout"><strong>En cas de doute :</strong> supprimez les noms et données personnelles avant de coller le texte dans l'IA.</div>
+
+    <div class="block-label">La règle des 3C — avant chaque utilisation</div>
+    <div class="threeC">
+      <div class="c-row">
+        <div class="c-badge">C</div>
+        <div><div class="c-title">Confidentiel ?</div><div class="c-text">Ce que je mets contient-il des données personnelles ? Si oui, <strong>je les retire avant</strong>.</div></div>
+      </div>
+      <div class="c-row">
+        <div class="c-badge">C</div>
+        <div><div class="c-title">Conforme ?</div><div class="c-text">Si l'IA rédige en mon nom, est-ce que <strong>j'assume cette réponse</strong> ? Je la relis et la valide.</div></div>
+      </div>
+      <div class="c-row">
+        <div class="c-badge">C</div>
+        <div><div class="c-title">Contrôlé ?</div><div class="c-text">Ai-je <strong>vérifié</strong> le résultat ? Les chiffres, les références de loi, les dates ?</div></div>
+      </div>
+    </div>
+
+    <div class="intern">💡 <b>Le bon état d'esprit :</b> l'IA est un stagiaire brillant mais sans mémoire — chaque nouvelle conversation repart de zéro. Donnez-lui des instructions claires, faites-lui refaire sans complexe (« ce n'est pas bon, recommence »), et gardez toujours le dernier mot.</div>
+  </section>
+
+  <!-- ============ PANEL 4 — ETHIQUE & AI ACT ============ -->
+  <section class="panel" id="ethique">
+    <div class="sec-eyebrow">Partie 4</div>
+    <h2 class="sec-title">Éthique &amp; cadre légal</h2>
+    <p class="sec-lead">L'IA générative soulève des questions de droits d'auteur, d'emploi et de responsabilité. L'Europe a posé un premier cadre : l'AI Act.</p>
+
+    <div class="block-label">L'AI Act européen</div>
+    <div class="aia-banner">
+      <div class="aia-banner-txt">
+        <strong>Règlement UE 2024/1689</strong> — le premier cadre juridique au monde dédié à l'intelligence artificielle, applicable à tous les acteurs publics et privés européens.
+        <span class="vig">Mise en vigueur · <strong>Fin 2024</strong></span>
+      </div>
+      <div class="aia-shield">🛡️</div>
+    </div>
+
+    <div class="block-label">Des interdictions sur les IA qui…</div>
+    <div class="bans">
+      <div class="ban"><div class="ban-i">🎭</div><strong>Manipulent ou trompent</strong> les individus.</div>
+      <div class="ban"><div class="ban-i">😶</div><strong>Exploitent vos émotions ou votre visage</strong> sans consentement.</div>
+      <div class="ban"><div class="ban-i">⚖️</div><strong>Notent socialement</strong> les citoyens à des fins discriminatoires.</div>
+    </div>
+    <div class="sanction"><span class="lab">En cas de non-respect</span>Amendes jusqu'à <strong>7 % du chiffre d'affaires mondial</strong> ou <strong>35 millions d'euros</strong> pour les violations les plus graves.</div>
+
+    <div class="impact">
+      <div class="impact-i">🏛️</div>
+      <div>
+        <div class="impact-l">Ce que ça signifie pour votre commune</div>
+        <div>Si votre collectivité utilise l'IA pour traiter des demandes d'administrés, elle doit le <strong>signaler</strong> et garantir qu'un <strong>humain reste responsable</strong> de la décision finale. L'IA assiste — elle ne décide pas.</div>
+      </div>
+    </div>
+
+    <div class="block-label">Les questions ouvertes du débat</div>
+    <div class="debat">
+      <div class="debat-q">« Si une image — ou une chanson — est générée par une IA à partir d'un prompt humain, qui en est l'auteur : l'algorithme, ou l'humain qui a formulé l'intention ? »</div>
+      <div class="debat-q">« L'IA est-elle une menace ou une opportunité pour l'emploi des agents publics ? »</div>
+    </div>
+    <div class="callout">Ces questions n'ont pas de réponse tranchée — l'essentiel est de rester <strong>lucide, transparent et responsable</strong> dans chacun de vos usages.</div>
+  </section>
+
+</div>
+
+<footer>
+  <strong>CDG88 — Centre de Gestion de la Fonction Publique Territoriale des Vosges</strong><br>
+  Formation IA Générative · Secrétaire de Mairie · 2026 · Mémo de restitution
+</footer>
+
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.panel');
+  function activate(id){
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === id));
+    panels.forEach(p => p.classList.toggle('active', p.id === id));
+    if(location.hash !== '#'+id) history.replaceState(null,'','#'+id);
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  tabs.forEach(t => t.addEventListener('click', () => activate(t.dataset.tab)));
+  // Ouvrir sur l'onglet de l'ancre si présente
+  const start = location.hash.replace('#','');
+  if(start && document.getElementById(start)) activate(start);
+</script>
+
+</body>
+</html>
