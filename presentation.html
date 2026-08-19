@@ -3881,7 +3881,7 @@ function quizDemoLaunch(){
     QUIZ_STATE.sessionRef.child('participants/' + pid + '/score').set(0);
   });
 
-  show(39); // slide 40 (index 39)
+  show(51); // slide 52 (index 51) — première question
   setTimeout(quizLoadQuestion, 400);
 }
 
@@ -4085,7 +4085,7 @@ function quizShowResults(){
     document.getElementById('statHardest').textContent = 'Q' + (hardestIdx + 1);
   });
 
-  show(40); // slide 41 (index 40)
+  show(52); // slide 53 (index 52) — résultats/podium
 }
 
 // === Recommencer ===
@@ -4104,7 +4104,7 @@ function quizDemoReplay(){
   QUIZ_STATE.questionStats = [];
   QUIZ_STATE.votes = {};
   QUIZ_STATE.participants = {};
-  show(38); // retour slide 39 (index 38)
+  show(50); // retour slide 51 (index 50) — lobby quiz
 }
 
 // === Fonctions de fallback démo (utilisables si Firebase ne répond pas) ===
@@ -4118,14 +4118,14 @@ function quizDemoShowFakeResults(){
   document.getElementById('statBest').textContent = '8240';
   document.getElementById('statAvg').textContent = '7076';
   document.getElementById('statHardest').textContent = 'Q7';
-  show(40);
+  show(52); // slide 53 (index 52) — résultats/podium
 }
 
 // Initialiser la slide quiz au chargement
 const _origShow = window.show;
 window.show = function(idx){
   _origShow(idx);
-  if(idx === 38){ // slide 39 = démarrage quiz
+  if(idx === 50){ // slide 51 (index 50) = lobby démarrage quiz
     setTimeout(quizInitStartSlide, 100);
   }
 };
